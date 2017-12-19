@@ -7,34 +7,31 @@
 <? if ($flash['question']): ?>
     <?= $flash['question'] ?>
 <? endif; ?>
-
-<!--  CONTENT ELEMENT, uid:382/text [begin] -->
-		<div id="c382" class="csc-default csc-space-before-10 csc-space-after-25">
-		<!--  Header: [begin] -->
-			<div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">
-                <? if ($GLOBALS['perm']->have_perm('root')) :?>
-        <?= _("Startseite für Root bei Stud.IP")?>
-    <? elseif ($GLOBALS['perm']->have_perm('admin')) : ?>
-        <?= _("Startseite für Admins")?>
-    <? elseif ($GLOBALS['perm']->have_perm('dozent')) :?>
-        <?= _("Startseite für Lehrende")?>
-    <? else : ?>
-        <?= _("Ihre persönliche Startseite")?>
-    <? endif ?></h1></div>
-		<!--  Header: [end] -->
-			
-		<!--  Text: [begin] -->
-			
-<hr>
-		<!--  Text: [end] -->
-			</div>
-	<!--  CONTENT ELEMENT, uid:382/text [end] -->
+		
 <div class="mitte"><div class="haupttabelle">
 			<div class="hauptlinks"></div>
 			<div class="rechts">
 				<!--<div align="center"><a href="index.php?id=144"><img src="/fileadmin/template/img/suche1.png" alt=""></a></div>
 				<!--<div align="center"><a href="index.php?id=146"><img src="/fileadmin/template/img/suche2.png" alt=""></a></div>
 				<br>
+
+                <!--  CONTENT ELEMENT, uid:73/textpic [begin] -->
+                <div id="c73" class="csc-default csc-space-after-25">
+                <!--  Image block: [begin] -->
+                    <div class="csc-textpic-text">
+                <!--  Text: [begin] -->
+                    <img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/Kursstart.png") ?>" alt="" border="0" width="100%">
+                    <h2 class="intranet"><a href="index.php?id=35" title="Opens internal link in current window" class="internal-link">Meine Gruppen/Mein Arbeitsbereich</a></h2>
+                    <p class="bodytext">Bei 25 handelt es sich um ein Projekt für bis zu 25 "unter 25-jährige" aus dem Rechtskreis SGB II zur Öffnung, Erschließung und Operationalisierung individuell passgenauer Wege in Ausbildung oder Arbeit und zum Abbau von multiplen Integrationshemmnissen. 
+                    </p>
+                    <p class="bodytext"><a href="index.php?id=35" title="Opens internal link in current window" class="internal-link">Erfahren Sie mehr über die Aktivierungsmaßnahme</a><br><br>
+                    </p>
+                    <hr>
+                    <!--  Text: [end] -->
+                    </div>
+                    <!--  Image block: [end] -->
+                </div>
+                <!--  CONTENT ELEMENT, uid:73/textpic [end] -->
 
                 <!--  CONTENT ELEMENT, uid:14/textpic [begin] -->
                 <div id="c14" class="csc-default csc-space-after-25">
@@ -107,24 +104,6 @@
 			<div class="haupt">
 	
 		
-	<!--  CONTENT ELEMENT, uid:73/textpic [begin] -->
-		<div id="c73" class="csc-default csc-space-after-25">
-		<!--  Image block: [begin] -->
-			<div class="csc-textpic-text">
-		<!--  Text: [begin] -->
-            <img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/Kursstart.png") ?>" alt="" border="0" width="100%">
-			<h2 class="intranet"><a href="index.php?id=35" title="Opens internal link in current window" class="internal-link">Meine Gruppen/Mein Arbeitsbereich</a></h2>
-<p class="bodytext">Bei 25 handelt es sich um ein Projekt für bis zu 25 "unter 25-jährige" aus dem Rechtskreis SGB II zur Öffnung, Erschließung und Operationalisierung individuell passgenauer Wege in Ausbildung oder Arbeit und zum Abbau von multiplen Integrationshemmnissen. 
-</p>
-<p class="bodytext"><a href="index.php?id=35" title="Opens internal link in current window" class="internal-link">Erfahren Sie mehr über die Aktivierungsmaßnahme</a><br><br>
-</p>
-<hr>
-		<!--  Text: [end] -->
-			</div>
-		<!--  Image block: [end] -->
-			</div>
-	<!--  CONTENT ELEMENT, uid:73/textpic [end] -->
-		
 	<!--  CONTENT ELEMENT, uid:434/textpic [begin] -->
 		<div id="c434" class="csc-default csc-space-after-25">
 		<!--  Image block: [begin] -->
@@ -132,10 +111,9 @@
 		<!--  Text: [begin] -->
             <img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/Informationen.png") ?>" alt="" border="0" width="100%">
 			<h2 class="intranet"><a href="index.php?id=129" title="Opens internal link in current window" class="internal-link">Interne Informationen</a></h2>
-<p class="bodytext">Das vom Europäischen Sozialfond (ESF) geförderte Programm „Inklusion durch Enkulturation", welches in der Verantwortung des Niedersächsischen Kultusministeriums umgesetzt wird, zielt darauf Bildung in einen kommunalen Kontext der abgestimmten Zusammenarbeit unterschiedlicher Bildungsakteure und Institutionen zu setzen.&nbsp;
-</p>
-<p class="bodytext"><a href="index.php?id=129" title="Opens internal link in current window" class="internal-link">Weitere Informationen zum Projekt </a><br><br>
-</p>
+
+            <?= $this->render_partial($template, compact('widget')) ?>
+            
 <hr>
 		<!--  Text: [end] -->
 			</div></div>

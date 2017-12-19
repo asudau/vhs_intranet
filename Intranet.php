@@ -51,6 +51,7 @@ class Intranet extends StudIPPlugin implements SystemPlugin
     public function initialize ()
     {
         PageLayout::addStylesheet($this->getPluginUrl() . '/css/style.css');
+        PageLayout::addStylesheet($this->getPluginUrl() . '/css/intranet.css');
         //PageLayout::addStylesheet($this->getPluginURL().'/assets/style.css');
         PageLayout::addScript($this->getPluginURL().'/js/script.js');
 		$this->setupAutoload();

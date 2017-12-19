@@ -14,6 +14,8 @@
  * @category Stud.IP
  * @since    3.1
  */
+require_once 'app/controllers/news.php';
+
 
 class StartController extends StudipController
 {
@@ -45,6 +47,30 @@ class StartController extends StudipController
      */
     function index_action($action = false, $widgetId = null)
     {
+        
+        $this->news = StudipNews::GetNewsByRange('9fc5dd6a84acf0ad76d2de71b473b341', true, true);	
+        
+        //$global_news = StudipNews::GetNewsByRange('9fc5dd6a84acf0ad76d2de71b473b341', true); //localhost
+        foreach ($this->news as $news) {
+            object_add_view($news['news_id']);
+            object_set_visit($news['news_id'], 'news');
+        }
+        
+        $dispatcher = new StudipDispatcher();
+        $controller = new NewsController($dispatcher);
+        $response = $controller->relay('news/display/9fc5dd6a84acf0ad76d2de71b473b341');
+        //$response = $controller->relay('news/display/9fc5dd6a84acf0ad76d2de71b473b341'); //localhost
+        $this->template = $GLOBALS['template_factory']->open('shared/string');
+        $this->template->content = $response->body;
+        
+
+        if (StudipNews::CountUnread() > 0) {
+            $navigation = new Navigation('', PluginEngine::getLink($this, array(), 'read_all'));
+            $navigation->setImage(Icon::create('refresh', 'clickable', ["title" => _('Alle als gelesen markieren')]));
+            $icons[] = $navigation;
+        }
+
+        $this->template->icons = $icons;
         /**
         $this->left = WidgetHelper::getUserWidgets($GLOBALS['user']->id, 0);
         $this->right = WidgetHelper::getUserWidgets($GLOBALS['user']->id, 1);

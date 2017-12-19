@@ -1,3 +1,8 @@
+
+#c434 .contentbox > header{
+    display: none;
+}
+
 .news {
     padding: 5px;
     margin: 5px;
