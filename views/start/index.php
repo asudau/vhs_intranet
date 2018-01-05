@@ -25,10 +25,15 @@
                 <!--  Text: [begin] -->
                      <img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/unterlagen1.png") ?>" alt="" border="0" width="100%">
                      <h2 class="intranet"> <a href="index.php?id=21" title="Opens internal link in current window" class="internal-link">Dateien</a></h2>
-                        <p class="bodytext">Wie aktuell in der Landespolitik und Bundespolitik hat auch im Ammerland die Stärkung der Berufsorientierung an allen Schulformen sowie die Integration benachteiligter Jugendlicher in duale Berufsausbildung absolute Priorität. 
-                        </p>
-                        <p class="bodytext"><a href="index.php?id=21" title="Opens internal link in current window" class="internal-link">Mehr Angaben zum Projekt</a><br><br>
-                        </p>
+                         <? foreach ($mitarbeiter_folderwithfiles as $folder => $files){ ?>
+                    <section class="contentbox folder">
+                        <a class='folder_open' href=''><?= $folder ?></a>
+                        <? foreach ($files as $file){ ?>
+                        <li class='file_download' style="display:none"> <a href='../../../sendfile.php?force_download=1&type=0&file_id=<?= $file['dokument_id']?>&file_name=<?= $file['filename'] ?>'><?= $file['name'] ?></a></li>
+                        
+                        <?}?>
+                        </section>
+                    <?}?>
                     <hr>
                 <!--  Text: [end] -->
                 </div>
@@ -43,10 +48,10 @@
                 
                 <!--  Text: [begin] -->
                      <img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/kalender1.png") ?>" alt="" border="0" width="100%">
-                     <h2 class="intranet"> <a href="index.php?id=21" title="Opens internal link in current window" class="internal-link">Urlaubskalender</a></h2>
+                     <h2 class="intranet"> <a href="" title="Opens internal link in current window" class="internal-link">Urlaubskalender</a></h2>
                         <p class="bodytext">Wie aktuell in der Landespolitik und Bundespolitik hat auch im Ammerland die Stärkung der Berufsorientierung an allen Schulformen sowie die Integration benachteiligter Jugendlicher in duale Berufsausbildung absolute Priorität. 
                         </p>
-                        <p class="bodytext"><a href="index.php?id=21" title="Opens internal link in current window" class="internal-link">Mehr Angaben zum Projekt</a><br><br>
+                        <p class="bodytext"><a href="" title="Opens internal link in current window" class="internal-link">Mehr Angaben zum Projekt</a><br><br>
                         </p>
                     
                 <!--  Text: [end] -->
@@ -118,7 +123,7 @@
             <img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/Informationen.png") ?>" alt="" border="0" width="100%">
 			<h2 class="intranet">
                     <a href="" title="Opens internal link in current window" class="internal-link">Interne Informationen</a>
-                    <a href="http://localhost/ammerland3.4/public/dispatch.php/news/edit_news/new/9fc5dd6a84acf0ad76d2de71b473b341" rel="get_dialog">
+                    <a style="margin-left: 68%;" href="<?=$edit_link_internnews?>" rel="get_dialog">
                         <img src="http://localhost/ammerland3.4/public/assets/images/icons/blue/add.svg" alt="add" class="icon-role-clickable icon-shape-add" width="16" height="16">            
                     </a>
             </h2>
@@ -137,8 +142,8 @@
 		<!--  Text: [begin] -->
         <div style="position:relative">
        <img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/Projektbereich.png") ?>" alt="" border="0" width="100%">
-			<h2 class="intranet"><a href="index.php?id=34" title="Opens internal link in current window" class="internal-link">Neues aus dem Projektbereich</a>
-            <a href="http://localhost/ammerland3.4/public/dispatch.php/news/edit_news/new/9fc5dd6a84acf0ad76d2de71b473b341" rel="get_dialog">
+			<h2 class="intranet"><a href="" title="Opens internal link in current window" class="internal-link">Neues aus dem Projektbereich</a>
+            <a style="margin-left: 58%;" href="<?=$edit_link_projectnews?>" rel="get_dialog">
                 <img src="http://localhost/ammerland3.4/public/assets/images/icons/blue/add.svg" alt="add" class="icon-role-clickable icon-shape-add" width="16" height="16">            
             </a>
             </h2>
@@ -170,96 +175,6 @@
 		</div></div>
 		</div>
 
-
-<style>
-    .mitte {
-    font-size: 15px;
-    font-family: Arial, Helvetica, sans-serif, verdana;
-    text-align: left;
-    position: inherit;
-    width: 997px;
-    height: auto;
-    min-height: 1100px;
-    margin-top: 5px;
-    margin-right: auto;
-    margin-left: auto;
-}
-.rechts {
-    width: 315px;
-    height: auto;
-    float: right;
-
-}
-
-.csc-default {
-    font-size: 15px;
-    font-family: Arial, Helvetica, sans-serif, verdana;
-}
-.csc-space-after-25 {
-    margin-bottom: 25px !important;
-}
-h1.csc-firstHeader{
-    border-bottom: none;
-}
-.dsR4 {
-    width: 315px;
-    height: auto;
-}
-.dsR15 {
-    width: 105px;
-    height: 110px;
-}
-
-h1 {
-    color: #062c5b;
-    font-size: 22px;
-    font-weight: bold;
-    text-decoration: none;
-    margin: 0;
-}
-h4.intranet{
-    color: white;
-    font-size: 17px;
-    font-weight: bold;
-    background-image: url(<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/h4_hintergrund.gif") ?>);
-    background-repeat: repeat-x;
-    margin: 0;
-    padding-top: 5px;
-    padding-bottom: 10px;
-    padding-left: 5px;
-}
-
-h4, h2.box_header {
-    color: white;
-    font-size: 17px;
-    font-weight: bold;
-    background-image: url(/fileadmin/template/img/h4_hintergrund.gif);
-    background-repeat: repeat-x;
-    margin: 0;
-    padding-top: 5px;
-    padding-bottom: 10px;
-    padding-left: 5px;
-}
-.haupt {
-    width: auto;
-    height: auto;
-    margin-left: auto;
-    margin-right: 341px;
-}
-.zentriert {
-    text-align: center;
-}
-
-h2.intranet {
-    padding: 10px;
-    margin-top: -42px;
-    background-color: rgba(255,255,255,0.8);
-    width: 100%;
-    position: relative;
-    border-bottom: none;
-}
-</style>
-
 <script>
     var courses = 6;
 hidecourses = "- zuklappen";
@@ -278,4 +193,11 @@ $(".all_courses").click(function (e) {
            $(".all_courses").html( showcourses );
        }
 });
+
+
+$(".folder_open").click(function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $(this).siblings('.file_download').toggle();
+ });
 </script>

@@ -47,11 +47,19 @@ class StartController extends StudipController
      */
     function index_action($action = false, $widgetId = null)
     {
+        //$sem_id_mitarbeiterinnen = Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN');
+        $sem_id_mitarbeiterinnen = '9fc5dd6a84acf0ad76d2de71b473b341';
+        
+        //$sem_id_projektbereichn = Config::get()->getValue('INTRANET_SEMID_PROJEKTBEREICH');
+        $sem_id_projektbereich = '340cce15b3be8fb86247a7514599126a';
+        
+        $this->edit_link_internnews = 'http://localhost/ammerland3.4/public/dispatch.php/news/edit_news/new/'. $sem_id_mitarbeiterinnen;
+        $this->edit_link_projectnews = 'http://localhost/ammerland3.4/public/dispatch.php/news/edit_news/new/' . $sem_id_projektbereich;
         
         //get intern news
         $dispatcher = new StudipDispatcher();
         $controller = new NewsController($dispatcher);
-        $response = $controller->relay('news/display/9fc5dd6a84acf0ad76d2de71b473b341');
+        $response = $controller->relay('news/display/' . $sem_id_mitarbeiterinnen);
         //$response = $controller->relay('news/display/9fc5dd6a84acf0ad76d2de71b473b341'); //localhost
         $this->internnewstemplate = $GLOBALS['template_factory']->open('shared/string');
         $this->internnewstemplate->content = $response->body;
@@ -81,13 +89,32 @@ class StartController extends StudipController
         
         
         
+        //Get File-Folders of Intern Seminar MitarbeiterInnen
+        $db = DBManager::get();
+        $stmt = $db->prepare("SELECT folder_id, name FROM folder WHERE seminar_id = :cid");
+        $stmt->bindParam(":cid", $sem_id_mitarbeiterinnen);
+        $stmt->execute();
+        $this->mitarbeiter_folder = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
+        $this->mitarbeiter_folderwithfiles = array();
         
-        
-        
-        
-        
-        
+        foreach ($this->mitarbeiter_folder as $folder){
+            
+            $db = \DBManager::get();
+            $stmt = $db->prepare("SELECT * FROM `dokumente` WHERE `range_id` = :range_id
+                ORDER BY `name`");
+            $stmt->bindParam(":range_id", $folder['folder_id']);
+            $stmt->execute();
+            $response = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            
+            $files = array();
+            
+            foreach ($response as $item) {
+                $files[] = $item;
+            }
+            $this->mitarbeiter_folderwithfiles[$folder['name']] = $files;
+            
+        }
         
         
         
@@ -154,7 +181,7 @@ class StartController extends StudipController
          //get project news
         $dispatcher = new StudipDispatcher();
         $controller = new NewsController($dispatcher);
-        $response = $controller->relay('news/display/9fc5dd6a84acf0ad76d2de71b473b341');
+        $response = $controller->relay('news/display/' . $sem_id_projektbereich);
         //$response = $controller->relay('news/display/9fc5dd6a84acf0ad76d2de71b473b341'); //localhost
         $this->projectnewstemplate = $GLOBALS['template_factory']->open('shared/string');
         $this->projectnewstemplate->content = $response->body;
@@ -169,22 +196,7 @@ class StartController extends StudipController
         $this->projectnewstemplate->icons = $icons;
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         
         
         if ($GLOBALS['perm']->get_perm() == 'user') {
