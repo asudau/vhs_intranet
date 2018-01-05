@@ -48,20 +48,13 @@ class StartController extends StudipController
     function index_action($action = false, $widgetId = null)
     {
         
-        $this->news = StudipNews::GetNewsByRange('9fc5dd6a84acf0ad76d2de71b473b341', true, true);	
-        
-        //$global_news = StudipNews::GetNewsByRange('9fc5dd6a84acf0ad76d2de71b473b341', true); //localhost
-        foreach ($this->news as $news) {
-            object_add_view($news['news_id']);
-            object_set_visit($news['news_id'], 'news');
-        }
-        
+        //get intern news
         $dispatcher = new StudipDispatcher();
         $controller = new NewsController($dispatcher);
         $response = $controller->relay('news/display/9fc5dd6a84acf0ad76d2de71b473b341');
         //$response = $controller->relay('news/display/9fc5dd6a84acf0ad76d2de71b473b341'); //localhost
-        $this->template = $GLOBALS['template_factory']->open('shared/string');
-        $this->template->content = $response->body;
+        $this->internnewstemplate = $GLOBALS['template_factory']->open('shared/string');
+        $this->internnewstemplate->content = $response->body;
         
 
         if (StudipNews::CountUnread() > 0) {
@@ -70,7 +63,36 @@ class StartController extends StudipController
             $icons[] = $navigation;
         }
 
-        $this->template->icons = $icons;
+        $this->internnewstemplate->icons = $icons;
+        
+        
+        
+        //get new and recently visited courses of user
+        $statement = DBManager::get()->prepare("SELECT s.Seminar_id, s.Name, ouv.visitdate, ouv.type "
+                . "FROM seminare as s "
+                . "LEFT JOIN object_user_visits as ouv ON (s.Seminar_id = ouv.object_id) "
+                . "WHERE ouv.user_id = :user_id "
+                . "AND ouv.type = 'sem' "
+                . "AND s.Seminar_id in "
+                . "(SELECT su.Seminar_id FROM seminar_user as su WHERE su.user_id = :user_id) ORDER BY ouv.visitdate DESC");
+
+        $statement->execute(array(':user_id' => $GLOBALS['user']->id));
+        $this->courses = $statement->fetchAll(PDO::FETCH_ASSOC);
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         /**
         $this->left = WidgetHelper::getUserWidgets($GLOBALS['user']->id, 0);
         $this->right = WidgetHelper::getUserWidgets($GLOBALS['user']->id, 1);
@@ -127,6 +149,44 @@ class StartController extends StudipController
                 $sidebar->addWidget($settings);
             }
        **/
+        
+        
+         //get project news
+        $dispatcher = new StudipDispatcher();
+        $controller = new NewsController($dispatcher);
+        $response = $controller->relay('news/display/9fc5dd6a84acf0ad76d2de71b473b341');
+        //$response = $controller->relay('news/display/9fc5dd6a84acf0ad76d2de71b473b341'); //localhost
+        $this->projectnewstemplate = $GLOBALS['template_factory']->open('shared/string');
+        $this->projectnewstemplate->content = $response->body;
+        
+
+        if (StudipNews::CountUnread() > 0) {
+            $navigation = new Navigation('', PluginEngine::getLink($this, array(), 'read_all'));
+            $navigation->setImage(Icon::create('refresh', 'clickable', ["title" => _('Alle als gelesen markieren')]));
+            $icons[] = $navigation;
+        }
+
+        $this->projectnewstemplate->icons = $icons;
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         if ($GLOBALS['perm']->get_perm() == 'user') {
             PageLayout::postMessage(MessageBox::info(_('Sie haben noch nicht auf Ihre Bestätigungsmail geantwortet.'),
                 array(

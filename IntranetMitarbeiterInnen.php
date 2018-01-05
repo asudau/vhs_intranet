@@ -11,7 +11,7 @@
  */
 
 
-class IntranetMitarbeiterInnen extends StudIPPlugin implements PortalPlugin
+class IntranetMitarbeiterInnen extends StudIPPlugin implements SystemPlugin
 {
 
 
@@ -20,110 +20,67 @@ class IntranetMitarbeiterInnen extends StudIPPlugin implements PortalPlugin
     function __construct()
     {
         parent::__construct();
-        $this->template_factory = new Flexi_TemplateFactory(dirname(__FILE__) . '/templates/');    
-        PageLayout::addStylesheet($this->getPluginUrl() . '/css/intranet.css');
-        if (!$GLOBALS['perm']->have_perm('root')){
-            PageLayout::addStylesheet($this->getPluginUrl() . '/css/noAdmin.css');
-        }
-        $this->seminars = array('7637bfed08c7a2a3649eed149375cbc0');
-        //$this->seminars = array('9fc5dd6a84acf0ad76d2de71b473b341'); //localhost
+        global $user;
         
+         if($user->id != 'nobody'){
+            if (Navigation::hasItem('/start')){
+                Navigation::getItem('/start')->setURL( PluginEngine::getLink($this, array(), 'start/'));
+            }
+            $referer = $_SERVER['REQUEST_URI'];
+         
+         if ( $referer!=str_replace("dispatch.php/start","",$referer) ){
+				
+				//$result = $this->getSemStmt($GLOBALS['user']->id);
+				header('Location: '. $GLOBALS['ABSOLUTE_URI_STUDIP']. 'plugins.php/IntranetMitarbeiterInnen/start/', true, 303);
+				exit();	
+			} 
+         }
+        
+        
+        $this->template_factory = new Flexi_TemplateFactory(dirname(__FILE__) . '/templates/');    
+        //PageLayout::addStylesheet($this->getPluginUrl() . '/css/intranet.css');
     }
 
 
     public function getPluginName()
     {
-        return _('Intranet für MitarbeiterInnen');
+        return _('Intranet');
     }
 
-    public function getPortalTemplate()
+    // bei Aufruf des Plugins ÃƒÂ¼ber plugin.php/mooc/...
+    public function initialize ()
     {
-        $template = $this->template_factory->open('infos');
-		$template->set_attribute('title', 'Intranet für MitarbeiterInnen');
-		$template->set_attribute('content', '');
+        PageLayout::addStylesheet($this->getPluginUrl() . '/css/style.css');
+        PageLayout::addStylesheet($this->getPluginUrl() . '/css/intranet.css');
+        //PageLayout::addStylesheet($this->getPluginURL().'/assets/style.css');
+        PageLayout::addScript($this->getPluginURL().'/js/script.js');
+		$this->setupAutoload();
+    }
+	
+    public function perform($unconsumed_path) {
 
-        //set votes
-        if (get_config('VOTE_ENABLE')) {
-            
-            foreach ($this->seminars as $range_id){
-                //is there any evaluation?
-                $eval_db = new EvaluationDB();
-                $evaluations = StudipEvaluation::findMany($eval_db->getEvaluationIDs($range_id, EVAL_STATE_ACTIVE));
+	 //$this->setupAutoload();
+        $dispatcher = new Trails_Dispatcher(
+            $this->getPluginPath(),
+            rtrim(PluginEngine::getLink($this, array(), null), '/'),
+            'show'
+        );
+        $dispatcher->plugin = $this;
+        $dispatcher->dispatch($unconsumed_path);
+ 
+    }
 
-                //is there any questionnaire?
-                $statement = DBManager::get()->prepare("
-                SELECT questionnaires.*
-                FROM questionnaires
-                    INNER JOIN questionnaire_assignments ON (questionnaires.questionnaire_id = questionnaire_assignments.questionnaire_id)
-                WHERE questionnaire_assignments.range_id = :range_id
-                    
-                    AND startdate <= UNIX_TIMESTAMP()
-                ORDER BY questionnaires.mkdate DESC
-                ");
-                $statement->execute(array(
-                    'range_id' => $range_id
-                ));
-                $questionnaire_data = $statement->fetchAll(PDO::FETCH_ASSOC);
-            
-                $controller = new PluginController(new StudipDispatcher());
-                $response .= $evaluations ? $controller->relay('evaluation/display/'. $range_id)->body : '';
-                $response .= $questionnaire_data? $controller->relay('questionnaire/widget/'. $range_id)->body : '';
-            }
-
-            $votes = $GLOBALS['template_factory']->open('shared/string');
-            $votes->content = $response == '' ? 'Derzeit gibt es keine Abstimmungen oder Umfragen': $response;
-
-            if ($GLOBALS['perm']->have_perm('root')) {
-                $navigation = new Navigation('', 'dispatch.php/questionnaire/overview');
-                $navigation->setImage(Icon::create('admin', 'clickable', ["title" => _('Umfragen bearbeiten')]));
-                $votes->icons = array($navigation);
-            }
-            $template->votes = $votes->content;
-            
+    private function setupAutoload() {
+        if (class_exists("StudipAutoloader")) {
+            StudipAutoloader::addAutoloadPath(__DIR__ . '/models');
+        } else {
+            spl_autoload_register(function ($class) {
+                include_once __DIR__ . $class . '.php';
+            });
         }
+    }
+    
+    private function setupNavigation(){
         
-        //set news
-        $dispatcher = new StudipDispatcher();
-        $controller = new NewsController($dispatcher);
-        $news = $GLOBALS['template_factory']->open('shared/string');
-        $have_news = false;
-        
-        foreach ($this->seminars as $range_id){
-        
-            $have_news = (StudipNews::GetNewsByRange($range_id, true, true) || $have_news);
-            $response = $controller->relay('news/display/'. $range_id);
-            $news->content .= $response->body;
-        }
-
-        if (StudipNews::CountUnread() > 0) {
-            $navigation = new Navigation('', PluginEngine::getLink($this, array(), 'read_all'));
-            $navigation->setImage(Icon::create('refresh', 'clickable', ["title" => _('Alle als gelesen markieren')]));
-            $icons[] = $navigation;
-        }
-
-        //TODO generalisieren
-        if (get_config('NEWS_RSS_EXPORT_ENABLE')) {
-            if ($rss_id = StudipNews::GetRssIdFromRangeId('9fc5dd6a84acf0ad76d2de71b473b341')) {
-                $navigation = new Navigation('', 'rss.php', array('id' => $rss_id));
-                $navigation->setImage(Icon::create('rss', 'clickable', ["title" => _('RSS-Feed')]));
-                $icons[] = $navigation;
-            }
-        }
-
-        if ($GLOBALS['perm']->have_perm('root')) {
-            $navigation = new Navigation('', 'dispatch.php/news/edit_news/new/studip');
-            $navigation->setImage(Icon::create('add', 'clickable', ["title" => _('Ankündigungen bearbeiten')]), ["rel" => 'get_dialog']);
-            $icons[] = $navigation;
-            if (get_config('NEWS_RSS_EXPORT_ENABLE')) {
-                $navigation = new Navigation('', 'dispatch.php/news/rss_config/studip');
-                $navigation->setImage(Icon::create('rss+add', 'clickable', ["title" => _('RSS-Feed konfigurieren')]), ["data-dialog" => 'size=auto']);
-                $icons[] = $navigation;
-            }
-        }
-
-        $news->icons = $icons;
-        $template->news = $have_news ? $news->content : 'Derzeit gibt es keine aktuellen News oder Informationen';
-
-        return $template;
     }
 }

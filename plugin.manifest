@@ -1,12 +1,6 @@
-pluginclassname=Intranet
-pluginclassname=IntranetNews
-pluginclassname=IntranetDateien
 pluginclassname=IntranetMitarbeiterInnen
-pluginclassname=IntranetDateienDozentInnen
-pluginclassname=IntranetDozentInnen
-pluginname=IntranetWidget
-pluginclassname=IntranetQuestions
+pluginname=IntranetMitarbeiterInnen
 origin=elanev
 version=0.1
 plugincontext=Startseite
-description=Intranet der VHS Ammerland - Veranstaltung und Zugang
+description=Intranet der VHS Ammerland

@@ -15,23 +15,7 @@
 				<!--<div align="center"><a href="index.php?id=146"><img src="/fileadmin/template/img/suche2.png" alt=""></a></div>
 				<br>
 
-                <!--  CONTENT ELEMENT, uid:73/textpic [begin] -->
-                <div id="c73" class="csc-default csc-space-after-25">
-                <!--  Image block: [begin] -->
-                    <div class="csc-textpic-text">
-                <!--  Text: [begin] -->
-                    <img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/Kursstart.png") ?>" alt="" border="0" width="100%">
-                    <h2 class="intranet"><a href="index.php?id=35" title="Opens internal link in current window" class="internal-link">Meine Gruppen/Mein Arbeitsbereich</a></h2>
-                    <p class="bodytext">Bei 25 handelt es sich um ein Projekt für bis zu 25 "unter 25-jährige" aus dem Rechtskreis SGB II zur Öffnung, Erschließung und Operationalisierung individuell passgenauer Wege in Ausbildung oder Arbeit und zum Abbau von multiplen Integrationshemmnissen. 
-                    </p>
-                    <p class="bodytext"><a href="index.php?id=35" title="Opens internal link in current window" class="internal-link">Erfahren Sie mehr über die Aktivierungsmaßnahme</a><br><br>
-                    </p>
-                    <hr>
-                    <!--  Text: [end] -->
-                    </div>
-                    <!--  Image block: [end] -->
-                </div>
-                <!--  CONTENT ELEMENT, uid:73/textpic [end] -->
+               
 
                 <!--  CONTENT ELEMENT, uid:14/textpic [begin] -->
                 <div id="c14" class="csc-default csc-space-after-25">
@@ -103,16 +87,43 @@
 			</div>
 			<div class="haupt">
 	
-		
+		 <!--  CONTENT ELEMENT, uid:73/textpic [begin] -->
+                <div id="c73" class="csc-default csc-space-after-25">
+                <!--  Image block: [begin] -->
+                    <div class="csc-textpic-text">
+                <!--  Text: [begin] -->
+                    <img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/Kursstart.png") ?>" alt="" border="0" width="100%">
+                    <h2 class="intranet"><a href="index.php?id=35" title="Opens internal link in current window" class="internal-link">Meine Gruppen/Mein Arbeitsbereich</a></h2>
+                    <? foreach ($courses as $course){ ?>
+                    <section class="contentbox course">
+                        <a href='http://localhost/ammerland3.4/public/seminar_main.php?auswahl=<?=$course['Seminar_id']?>'><?= $course['Name'] ?></a></section>
+                        
+                    <?}?>
+                    <a class="all_courses" href="#"></a>
+                    
+                    <hr>
+                    <!--  Text: [end] -->
+                    </div>
+                    <!--  Image block: [end] -->
+                </div>
+                <!--  CONTENT ELEMENT, uid:73/textpic [end] -->
+                
+                
+                
 	<!--  CONTENT ELEMENT, uid:434/textpic [begin] -->
-		<div id="c434" class="csc-default csc-space-after-25">
+		<div id="c434" class="intranet_news csc-default csc-space-after-25">
 		<!--  Image block: [begin] -->
 			<div class="csc-textpic csc-textpic-intext-right csc-textpic-equalheight"><div class="csc-textpic-imagewrap"><div class="csc-textpic-image csc-textpic-last"><a href="index.php?id=129"><img src="fileadmin/_processed_/csm_Ide_gruen_web_4a9b5b6b7f.png" alt="" border="0" width="196" height="120"></a></div></div><div class="csc-textpic-text">
 		<!--  Text: [begin] -->
             <img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/Informationen.png") ?>" alt="" border="0" width="100%">
-			<h2 class="intranet"><a href="index.php?id=129" title="Opens internal link in current window" class="internal-link">Interne Informationen</a></h2>
+			<h2 class="intranet">
+                    <a href="" title="Opens internal link in current window" class="internal-link">Interne Informationen</a>
+                    <a href="http://localhost/ammerland3.4/public/dispatch.php/news/edit_news/new/9fc5dd6a84acf0ad76d2de71b473b341" rel="get_dialog">
+                        <img src="http://localhost/ammerland3.4/public/assets/images/icons/blue/add.svg" alt="add" class="icon-role-clickable icon-shape-add" width="16" height="16">            
+                    </a>
+            </h2>
 
-            <?= $this->render_partial($template, compact('widget')) ?>
+            <?= $this->render_partial($internnewstemplate, compact('widget')) ?>
             
 <hr>
 		<!--  Text: [end] -->
@@ -122,19 +133,20 @@
 	<!--  CONTENT ELEMENT, uid:434/textpic [end] -->
 		
 	<!--  CONTENT ELEMENT, uid:71/text [begin] -->
-		<div id="c71" class="csc-default csc-space-after-25">
+		<div id="c71" class="intranet_news csc-default csc-space-after-25">
 		<!--  Text: [begin] -->
         <div style="position:relative">
        <img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/Projektbereich.png") ?>" alt="" border="0" width="100%">
-			<h2 class="intranet"><a href="index.php?id=34" title="Opens internal link in current window" class="internal-link">Neues aus dem Projektbereich</a></h2>
-        </div>
-            <p class="bodytext">Die Berufseinstiegsbegleitung (BerEb) richtet sich an Schüler/innen, die einen Hauptschul- oder Förderschulabschluss anstreben und anschließend eine Ausbildung, auf diesem Weg aber besondere Unterstützung benötigen. 
-</p>
-<p class="bodytext"><a href="index.php?id=34" title="Opens internal link in current window" class="internal-link">Weitere Informationen über die Berufseinstiegsbegleitung</a><br><br>
-</p>
-<hr>
+			<h2 class="intranet"><a href="index.php?id=34" title="Opens internal link in current window" class="internal-link">Neues aus dem Projektbereich</a>
+            <a href="http://localhost/ammerland3.4/public/dispatch.php/news/edit_news/new/9fc5dd6a84acf0ad76d2de71b473b341" rel="get_dialog">
+                <img src="http://localhost/ammerland3.4/public/assets/images/icons/blue/add.svg" alt="add" class="icon-role-clickable icon-shape-add" width="16" height="16">            
+            </a>
+            </h2>
+        <?= $this->render_partial($projectnewstemplate, compact('widget')) ?>
+        <hr>
 		<!--  Text: [end] -->
 			</div>
+    </div>
 	<!--  CONTENT ELEMENT, uid:71/text [end] -->
 		
 	<!--  CONTENT ELEMENT, uid:13/textpic [begin] -->
@@ -247,3 +259,23 @@ h2.intranet {
     border-bottom: none;
 }
 </style>
+
+<script>
+    var courses = 6;
+hidecourses = "- zuklappen";
+showcourses = "+ Alle Kurse anzeigen";
+
+$(".all_courses").html( showcourses );
+$(".course:not(:lt("+courses+"))").hide();
+
+$(".all_courses").click(function (e) {
+   e.preventDefault();
+       if ($(".course:eq("+courses+")").is(":hidden")) {
+           $(".course:hidden").show();
+           $(".all_courses").html( hidecourses );
+       } else {
+           $(".course:not(:lt("+courses+"))").hide();
+           $(".all_courses").html( showcourses );
+       }
+});
+</script>
