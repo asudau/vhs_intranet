@@ -52,8 +52,12 @@ class IntranetMitarbeiterInnen extends StudIPPlugin implements SystemPlugin
     {
         PageLayout::addStylesheet($this->getPluginUrl() . '/css/style.css');
         PageLayout::addStylesheet($this->getPluginUrl() . '/css/intranet.css');
+        PageLayout::addStylesheet($this->getPluginUrl() . '/css/dhtmlxscheduler.css');
         //PageLayout::addStylesheet($this->getPluginURL().'/assets/style.css');
-        PageLayout::addScript($this->getPluginURL().'/js/script.js');
+        //PageLayout::addScript($this->getPluginURL().'/js/script.js');
+        PageLayout::addScript($this->getPluginURL().'/assets/js/dhtmlxscheduler.js');
+        PageLayout::addScript($this->getPluginURL().'/assets/js/locale_de.js');
+        PageLayout::addScript($this->getPluginURL().'/assets/js/dhtmlxscheduler_timeline.js');
 		$this->setupAutoload();
     }
 	

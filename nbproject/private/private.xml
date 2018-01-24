@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/anne/github/vhs_intranet/css/intranet.css</file>
-            <file>file:/home/anne/github/vhs_intranet/controllers/start.php</file>
-            <file>file:/home/anne/github/vhs_intranet/views/start/index.php</file>
-            <file>file:/home/anne/github/vhs_intranet/IntranetNews.php</file>
-            <file>file:/home/anne/github/vhs_intranet/Intranet.php</file>
+            <file>file:/home/anne/github/vhs_intranet/css/dhtmlxscheduler.css</file>
+            <file>file:/home/anne/github/vhs_intranet/IntranetMitarbeiterInnen.php</file>
+            <file>file:/home/anne/github/vhs_intranet/views/ferienkalender/index.php</file>
+            <file>file:/home/anne/github/vhs_intranet/controllers/ferienkalender.php</file>
+            <file>file:/home/anne/github/vhs_intranet/assets/js/dhtmlxscheduler_timeline.js</file>
+            <file>file:/home/anne/github/vhs_intranet/views/ferienkalender/edit.php</file>
+            <file>file:/home/anne/github/vhs_intranet/views/ferienkalender/timeline.php</file>
         </group>
     </open-files>
 </project-private>

@@ -48,7 +48,7 @@
                 
                 <!--  Text: [begin] -->
                      <img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/kalender1.png") ?>" alt="" border="0" width="100%">
-                     <h2 class="intranet"> <a href="" title="Opens internal link in current window" class="internal-link">Urlaubskalender</a></h2>
+                     <h2 class="intranet"> <a href="<?=$GLOBALS['ABSOLUTE_URI_STUDIP']. 'plugins.php/IntranetMitarbeiterInnen/urlaubskalender/'?>" title="Opens internal link in current window" class="internal-link">Urlaubskalender</a></h2>
                         <p class="bodytext">Wie aktuell in der Landespolitik und Bundespolitik hat auch im Ammerland die Stärkung der Berufsorientierung an allen Schulformen sowie die Integration benachteiligter Jugendlicher in duale Berufsausbildung absolute Priorität. 
                         </p>
                         <p class="bodytext"><a href="" title="Opens internal link in current window" class="internal-link">Mehr Angaben zum Projekt</a><br><br>
