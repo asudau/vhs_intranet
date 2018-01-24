@@ -1,7 +1,7 @@
 <? use Studip\Button, Studip\LinkButton; ?>
 <?= LinkButton::createBack(_('Zurück'), $controller->url_for('urlaubskalender/')) ?>
 
-<div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:100%; overflow-x: scroll;'>
+<div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:<?= 50*count($keys)+100?>px;'>
     <div id='container' style='width:100%;'>
     <div class="dhx_cal_navline">
         <div class="dhx_cal_prev_button">&nbsp;</div>
@@ -39,6 +39,7 @@
     ?>  
            ],
      y_property:"section_id",
+     section_autoheight : false, 
      render:    "bar",
      
 });
@@ -90,8 +91,6 @@
     .today{
         background:#F2F5A9;
     }
-    .dhx_cal_prev_button{
-        
-    }
+ 
 </style>
     

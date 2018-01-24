@@ -171,7 +171,7 @@ class UrlaubskalenderController extends StudipController
                     ->fireJSFunctionOnSelect('select_user');
         
         
-        $this->render_action('edit');
+        $this->render_action('new');
         
     
     }
@@ -233,6 +233,52 @@ class UrlaubskalenderController extends StudipController
         
     
     }
+    
+     /**
+     *  This action adds a holiday entry
+     *
+     * @return void
+     */
+    public function edituser_action($id = '')
+    {
+        PageLayout::setTitle(_('Neuen Urlaubstermin eintragen'));
+        $this->id = '9fc5dd6a84acf0ad76d2de71b473b341';
+        
+         $sidebar = Sidebar::get();
+            $sidebar->setImage('sidebar/home-sidebar.png');
+            $sidebar->setTitle(_("Meine Startseite"));
+
+            
+            $views = new ViewsWidget();
+        $views->addLink(_('Kalenderansicht'),
+                        $this->url_for('urlaubskalender'));
+        $views->addLink(_('Zeitstrahl-Ansicht'),
+                        $this->url_for('urlaubskalender/timeline'));
+        $sidebar->addWidget($views);
+            
+            // Show action to add widget only if not all widgets have already been added.
+            $actions = new ActionsWidget();
+
+            $actions->addLink(_('Neuen Urlaubstermin eintragen'),
+                              $this->url_for('urlaubskalender/new'),
+                              Icon::create('add', 'clickable'));
+            
+            $actions->addLink(_('Urlaubstermine bearbeiten'),
+                              $this->url_for('urlaubskalender/edit'),
+                              Icon::create('edit', 'clickable'));
+
+            $sidebar->addWidget($actions);
+       
+        
+        
+        $this->user_id = $_POST['user_id'];
+        $this->entries = MAHoliday::findBySQL('user_id = ? ORDER BY begin ASC',
+                    array($this->user_id));
+        
+        $this->render_action('edituser');
+        
+    
+    }
 
     public function save_action($id = NULL) {
         
@@ -244,7 +290,7 @@ class UrlaubskalenderController extends StudipController
                 }
                 
                     try {
-                    $this->provider->setValue($key, $value);
+                    $this->entry->setValue($key, $value);
                     } catch (Exception $e){}
                 
             }
@@ -281,7 +327,12 @@ class UrlaubskalenderController extends StudipController
      */
     function delete_action($id)
     {
-       
+        if($entry = MAHoliday::find($id)){
+            $entry->delete();
+            PageLayout::postMessage(MessageBox::success(_('Der Eintrag wurde gelöscht.')));
+        }
+        
+        $this->redirect($this->url_for('/urlaubskalender'));
     }
 
     
