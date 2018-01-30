@@ -47,14 +47,14 @@ class StartController extends StudipController
      */
     function index_action($action = false, $widgetId = null)
     {
-        //$sem_id_mitarbeiterinnen = Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN');
-        $sem_id_mitarbeiterinnen = '9fc5dd6a84acf0ad76d2de71b473b341';
+        $sem_id_mitarbeiterinnen = Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN');
+        //$sem_id_mitarbeiterinnen = '9fc5dd6a84acf0ad76d2de71b473b341';
         
-        //$sem_id_projektbereichn = Config::get()->getValue('INTRANET_SEMID_PROJEKTBEREICH');
-        $sem_id_projektbereich = '340cce15b3be8fb86247a7514599126a';
+        $sem_id_projektbereichn = Config::get()->getValue('INTRANET_SEMID_PROJEKTBEREICH');
+        //$sem_id_projektbereich = '340cce15b3be8fb86247a7514599126a';
         
-        $this->edit_link_internnews = 'http://localhost/ammerland3.4/public/dispatch.php/news/edit_news/new/'. $sem_id_mitarbeiterinnen;
-        $this->edit_link_projectnews = 'http://localhost/ammerland3.4/public/dispatch.php/news/edit_news/new/' . $sem_id_projektbereich;
+        $this->edit_link_internnews = URLHelper::getLink("dispatch.php/news/edit_news/new/". $sem_id_mitarbeiterinnen);
+        $this->edit_link_projectnews = URLHelper::getLink("dispatch.php/news/edit_news/new/" . $sem_id_projektbereich);
         
         //get intern news
         $dispatcher = new StudipDispatcher();

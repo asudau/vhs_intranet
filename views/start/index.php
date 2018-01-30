@@ -23,7 +23,7 @@
                 <div class="csc-textpic-text">
                 
                 <!--  Text: [begin] -->
-                     <img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/unterlagen1.png") ?>" alt="" border="0" width="100%">
+                     <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/unterlagen1.png") ?>" alt="" border="0" width="100%">
                      <h2 class="intranet"> <a href="index.php?id=21" title="Opens internal link in current window" class="internal-link">Dateien</a></h2>
                          <? foreach ($mitarbeiter_folderwithfiles as $folder => $files){ ?>
                     <section class="contentbox folder">
@@ -47,7 +47,7 @@
                 <div class="csc-textpic-text">
                 
                 <!--  Text: [begin] -->
-                     <img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/kalender1.png") ?>" alt="" border="0" width="100%">
+                     <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/kalender1.png") ?>" alt="" border="0" width="100%">
                      <h2 class="intranet"> <a href="<?=$GLOBALS['ABSOLUTE_URI_STUDIP']. 'plugins.php/IntranetMitarbeiterInnen/urlaubskalender/'?>" title="Opens internal link in current window" class="internal-link">Urlaubskalender</a></h2>
                         <p class="bodytext">Wie aktuell in der Landespolitik und Bundespolitik hat auch im Ammerland die Stärkung der Berufsorientierung an allen Schulformen sowie die Integration benachteiligter Jugendlicher in duale Berufsausbildung absolute Priorität. 
                         </p>
@@ -64,27 +64,27 @@
 				<h4 class="intranet">Unsere Angebote</h4>
 				<table class="dsR4" cellspacing="0" cellpadding="0" border="0">
 					<tbody><tr>
-						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=64" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/pro_gesellschaft.png") ?>" alt="" border="0" width="73" height="72"><br>
+						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=64" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/pro_gesellschaft.png") ?>" alt="" border="0" width="73" height="72"><br>
 							Gesellschaft</a></div></td>
-						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=65" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/pro_paedagogik.png") ?>" alt="" border="0" width="73" height="72"><br>
+						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=65" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/pro_paedagogik.png") ?>" alt="" border="0" width="73" height="72"><br>
 						Pädagogik</a></div></td>
-						<td class="dsR15"><a href="https://www.kvhs-ammerland.de/index.php?id=66" target="_blank"></a><div class="zentriert"><a href="index.php?id=66"><img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/pro_zielgruppen.png") ?>" alt="" border="0" width="73" height="72"><br>
+						<td class="dsR15"><a href="https://www.kvhs-ammerland.de/index.php?id=66" target="_blank"></a><div class="zentriert"><a href="index.php?id=66"><img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/pro_zielgruppen.png") ?>" alt="" border="0" width="73" height="72"><br>
 							Zielgruppen</a></div></td>
 					</tr>
 					<tr>
-						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=67" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/pro_grundbildung.png") ?>" alt="" border="0" width="72" height="72"><br>
+						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=67" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/pro_grundbildung.png") ?>" alt="" border="0" width="72" height="72"><br>
 							Grundbildung</a></div></td>
-						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=68" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/pro_gesundheit.png") ?>" alt="" border="0" width="73" height="72"><br>
+						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=68" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/pro_gesundheit.png") ?>" alt="" border="0" width="73" height="72"><br>
 							Gesundheit</a></div></td>
-						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=69" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/pro_beruf.png") ?>" alt="" border="0" width="73" height="72"><br>
+						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=69" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/pro_beruf.png") ?>" alt="" border="0" width="73" height="72"><br>
 							Beruf</a></div></td>
 					</tr>
 					<tr>
-						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=70" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/pro_sprachen.png") ?>" alt="" border="0" width="73" height="72"><br>
+						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=70" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/pro_sprachen.png") ?>" alt="" border="0" width="73" height="72"><br>
 							Sprachen</a></div></td>
-						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=71" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/pro_kultur.png") ?>" alt="" border="0" width="73" height="72"><br>
+						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=71" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/pro_kultur.png") ?>" alt="" border="0" width="73" height="72"><br>
 						Kultur</a></div></td>
-						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=4" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/pro_beruf.png") ?>" alt="" border="0" width="73" height="72"><br>
+						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=4" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/pro_beruf.png") ?>" alt="" border="0" width="73" height="72"><br>
 						Projekte</a></div></td>
 					</tr>
 				</tbody></table>
@@ -97,11 +97,11 @@
                 <!--  Image block: [begin] -->
                     <div class="csc-textpic-text">
                 <!--  Text: [begin] -->
-                    <img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/Kursstart.png") ?>" alt="" border="0" width="100%">
+                    <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/Kursstart.png") ?>" alt="" border="0" width="100%">
                     <h2 class="intranet"><a href="index.php?id=35" title="Opens internal link in current window" class="internal-link">Meine Gruppen/Mein Arbeitsbereich</a></h2>
                     <? foreach ($courses as $course){ ?>
                     <section class="contentbox course">
-                        <a href='http://localhost/ammerland3.4/public/seminar_main.php?auswahl=<?=$course['Seminar_id']?>'><?= $course['Name'] ?></a></section>
+                        <a href='<?=URLHelper::getLink("/seminar_main.php?auswahl=" . $course['Seminar_id'] )?>'><?= $course['Name'] ?></a></section>
                         
                     <?}?>
                     <a class="all_courses" href="#"></a>
@@ -120,11 +120,11 @@
 		<!--  Image block: [begin] -->
 			<div class="csc-textpic csc-textpic-intext-right csc-textpic-equalheight"><div class="csc-textpic-imagewrap"><div class="csc-textpic-image csc-textpic-last"><a href="index.php?id=129"><img src="fileadmin/_processed_/csm_Ide_gruen_web_4a9b5b6b7f.png" alt="" border="0" width="196" height="120"></a></div></div><div class="csc-textpic-text">
 		<!--  Text: [begin] -->
-            <img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/Informationen.png") ?>" alt="" border="0" width="100%">
+            <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/Informationen.png") ?>" alt="" border="0" width="100%">
 			<h2 class="intranet">
                     <a href="" title="Opens internal link in current window" class="internal-link">Interne Informationen</a>
                     <a style="margin-left: 68%;" href="<?=$edit_link_internnews?>" rel="get_dialog">
-                        <img src="http://localhost/ammerland3.4/public/assets/images/icons/blue/add.svg" alt="add" class="icon-role-clickable icon-shape-add" width="16" height="16">            
+                        <img src="/assets/images/icons/blue/add.svg" alt="add" class="icon-role-clickable icon-shape-add" width="16" height="16">            
                     </a>
             </h2>
 
@@ -141,10 +141,10 @@
 		<div id="c71" class="intranet_news csc-default csc-space-after-25">
 		<!--  Text: [begin] -->
         <div style="position:relative">
-       <img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/Projektbereich.png") ?>" alt="" border="0" width="100%">
+       <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/Projektbereich.png") ?>" alt="" border="0" width="100%">
 			<h2 class="intranet"><a href="" title="Opens internal link in current window" class="internal-link">Neues aus dem Projektbereich</a>
             <a style="margin-left: 58%;" href="<?=$edit_link_projectnews?>" rel="get_dialog">
-                <img src="http://localhost/ammerland3.4/public/assets/images/icons/blue/add.svg" alt="add" class="icon-role-clickable icon-shape-add" width="16" height="16">            
+                <img src="/assets/images/icons/blue/add.svg" alt="add" class="icon-role-clickable icon-shape-add" width="16" height="16">            
             </a>
             </h2>
         <?= $this->render_partial($projectnewstemplate, compact('widget')) ?>
@@ -159,7 +159,7 @@
 		<!--  Image block: [begin] -->
 			<div class="csc-textpic-text">
 		<!--  Text: [begin] -->
-            <img src="<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/Kursstart.png") ?>" alt="" border="0" width="100%">
+            <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/Kursstart.png") ?>" alt="" border="0" width="100%">
 			<h2 class="intranet"> <a href="index.php?id=21" title="Opens internal link in current window" class="internal-link">Kurse die demnächst starten</a></h2>
 <p class="bodytext">Wie aktuell in der Landespolitik und Bundespolitik hat auch im Ammerland die Stärkung der Berufsorientierung an allen Schulformen sowie die Integration benachteiligter Jugendlicher in duale Berufsausbildung absolute Priorität. 
 </p>

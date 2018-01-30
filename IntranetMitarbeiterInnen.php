@@ -19,21 +19,36 @@ class IntranetMitarbeiterInnen extends StudIPPlugin implements SystemPlugin
 
     function __construct()
     {
-        parent::__construct();
         global $user;
         
-         if($user->id != 'nobody'){
+        $courses = $user->course_memberships;
+        $ma_intranet = false;
+        foreach ($courses as $cm){
+            if ($cm->seminar_id == '7637bfed08c7a2a3649eed149375cbc0') $ma_intranet = true;
+            //test lokal
+            if ($cm->seminar_id == '568fce7262620700103ce1657cabc5e3') $ma_intranet = true; 
+        } 
+        $referer = $_SERVER['REQUEST_URI'];
+        
+        if($ma_intranet){
+            
+            parent::__construct();
+         
             if (Navigation::hasItem('/start')){
                 Navigation::getItem('/start')->setURL( PluginEngine::getLink($this, array(), 'start/'));
             }
-            $referer = $_SERVER['REQUEST_URI'];
-         
-         if ( $referer!=str_replace("dispatch.php/start","",$referer) ){
+            
+         //Intranetnutzer werden statt auf die allgemeine Startseite auf ihre individuelle Startseite weitergeleitet
+         if ( $referer!=str_replace("dispatch.php/start","",$referer) && $ma_intranet){
 				
 				//$result = $this->getSemStmt($GLOBALS['user']->id);
 				header('Location: '. $GLOBALS['ABSOLUTE_URI_STUDIP']. 'plugins.php/IntranetMitarbeiterInnen/start/', true, 303);
 				exit();	
 			} 
+         //Nicht-Intranetnutzer werden, wenn sie die Intranet URL verwenden, auf die allgemeine Startseite weitergeleitet
+         } else if ( $referer!=str_replace("plugins.php/IntranetMitarbeiterInnen","",$referer) || $referer!=str_replace("plugins.php/intranetmitarbeiterinnen","",$referer)){
+             header('Location: '. $GLOBALS['ABSOLUTE_URI_STUDIP']. 'dispatch.php/start', true, 303);
+				exit();	
          }
         
         
@@ -86,5 +101,10 @@ class IntranetMitarbeiterInnen extends StudIPPlugin implements SystemPlugin
     
     private function setupNavigation(){
         
+    }
+    
+     public function getPortalTemplate()
+    {
+        return NULL;
     }
 }

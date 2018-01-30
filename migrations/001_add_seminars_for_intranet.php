@@ -13,7 +13,9 @@ class AddSeminarsForIntranet extends Migration
         //TODO Seminar anlegen
         //TODO Sem_id in config eintragen ($this->addConfigOptionMitarbeiterInnenSemID($sem_id))
         //TODO Auto Insert von MitarbeiterInnen einrichten 
-           
+        $sem_id = '7637bfed08c7a2a3649eed149375cbc0';
+        $this->addConfigOptionMitarbeiterInnenSemID($sem_id);
+        $this->addConfigOptionProjektBereichSemID($sem_id);
         SimpleORMap::expireTableScheme();
     }
 
@@ -39,6 +41,18 @@ class AddSeminarsForIntranet extends Migration
             'description' => _('ID der Veranstaltung welche Inhalte fuer MitarbeiterInnen enthaelt')
             ));
         //Config::get()->getValue('MiniCourse_SEM_CLASS_CONFIG_ID');
+    }
+    
+     private function addConfigOptionProjektBereichSemID($sem_id)
+    {
+        Config::get()->create('INTRANET_SEMID_PROJEKTBEREICH', array(
+            'value' => $sem_id, 
+            'is_default' => 0, 
+            'type' => 'string',
+            'range' => 'global',
+            'section' => 'global',
+            'description' => _('ID der Veranstaltung welche Inhalte fuer den Projektbereich enthaelt')
+            ));
     }
 
     private function insertSemClass()
@@ -103,9 +117,9 @@ class AddSeminarsForIntranet extends Migration
         $GLOBALS['SEM_CLASS'] = SemClass::refreshClasses();
     }
 
-    private function removeConfigOption()
+    private function removeConfigOptions()
     {
-        return Config::get()->delete('INTRANET_SEMID_MITARBEITERINNEN');
+        return (Config::get()->delete('INTRANET_SEMID_MITARBEITERINNEN') && Config::get()->delete('INTRANET_SEMID_PROJEKTBEREICH'));
     }
 }
 

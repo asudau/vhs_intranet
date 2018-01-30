@@ -78,7 +78,7 @@ h4.intranet{
     color: white;
     font-size: 17px;
     font-weight: bold;
-    background-image: url(<?=URLHelper::getLink("plugins_packages/virtUOS/IntranetWidget/assets/images/h4_hintergrund.gif") ?>);
+    background-image: url(<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/h4_hintergrund.gif") ?>);
     background-repeat: repeat-x;
     margin: 0;
     padding-top: 5px;

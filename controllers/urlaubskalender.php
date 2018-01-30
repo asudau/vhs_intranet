@@ -47,8 +47,8 @@ class UrlaubskalenderController extends StudipController
      */
     function index_action($action = false, $widgetId = null)
     {
-        //$sem_id_mitarbeiterinnen = Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN');
-        $sem_id_mitarbeiterinnen = '9fc5dd6a84acf0ad76d2de71b473b341';
+        $sem_id_mitarbeiterinnen = Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN');
+        //$sem_id_mitarbeiterinnen = '9fc5dd6a84acf0ad76d2de71b473b341';
 
             $sidebar = Sidebar::get();
             $sidebar->setImage('sidebar/home-sidebar.png');
@@ -96,8 +96,8 @@ class UrlaubskalenderController extends StudipController
      */
     function timeline_action($action = false, $widgetId = null)
     {
-        //$sem_id_mitarbeiterinnen = Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN');
-        $sem_id_mitarbeiterinnen = '9fc5dd6a84acf0ad76d2de71b473b341';
+        $sem_id_mitarbeiterinnen = Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN');
+        //$sem_id_mitarbeiterinnen = '9fc5dd6a84acf0ad76d2de71b473b341';
         
         //alle Einträge der Tabelle
         $this->dates = MAHoliday::findBySQL('1=1');
@@ -127,7 +127,8 @@ class UrlaubskalenderController extends StudipController
     public function new_action($id = '')
     {
         PageLayout::setTitle(_('Neuen Urlaubstermin eintragen'));
-        $this->id = '9fc5dd6a84acf0ad76d2de71b473b341';
+        $this->id = Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN');
+        //$this->id = '9fc5dd6a84acf0ad76d2de71b473b341';
         
          $sidebar = Sidebar::get();
             $sidebar->setImage('sidebar/home-sidebar.png');
@@ -184,7 +185,8 @@ class UrlaubskalenderController extends StudipController
     public function edit_action($id = '')
     {
         PageLayout::setTitle(_('Neuen Urlaubstermin eintragen'));
-        $this->id = '9fc5dd6a84acf0ad76d2de71b473b341';
+        $this->id = Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN');
+        //$this->id = '9fc5dd6a84acf0ad76d2de71b473b341';
         
          $sidebar = Sidebar::get();
             $sidebar->setImage('sidebar/home-sidebar.png');
@@ -242,7 +244,8 @@ class UrlaubskalenderController extends StudipController
     public function edituser_action($id = '')
     {
         PageLayout::setTitle(_('Neuen Urlaubstermin eintragen'));
-        $this->id = '9fc5dd6a84acf0ad76d2de71b473b341';
+        $this->id = Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN');
+        //$this->id = '9fc5dd6a84acf0ad76d2de71b473b341';
         
          $sidebar = Sidebar::get();
             $sidebar->setImage('sidebar/home-sidebar.png');

@@ -14,8 +14,8 @@ class AddTableForMaHolidaycalendar extends Migration
         $db->exec("CREATE TABLE IF NOT EXISTS `intranet_ma_holidays` (
           `id` int(11) NOT NULL AUTO_INCREMENT,
           `user_id` varchar(64) NOT NULL,
-          `begin` int(11) DEFAULT NULL,
-          `end` int(11) DEFAULT NULL,
+          `begin` varchar(16) DEFAULT NULL,
+          `end` varchar(16) DEFAULT NULL,
           `notice` mediumtext,
           `chdate` int(11) DEFAULT NULL,
           `mkdate` int(11) DEFAULT NULL,
