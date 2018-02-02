@@ -50,8 +50,12 @@ class StartController extends StudipController
         $sem_id_mitarbeiterinnen = Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN');
         //$sem_id_mitarbeiterinnen = '9fc5dd6a84acf0ad76d2de71b473b341';
         
-        $sem_id_projektbereichn = Config::get()->getValue('INTRANET_SEMID_PROJEKTBEREICH');
+        $sem_id_projektbereich = Config::get()->getValue('INTRANET_SEMID_PROJEKTBEREICH');
         //$sem_id_projektbereich = '340cce15b3be8fb86247a7514599126a';
+        
+        global $perm; 
+        $this->mitarbeiter_admin = $perm->have_studip_perm('dozent', $sem_id_mitarbeiterinnen);
+        $this->projekt_admin = $perm->have_studip_perm('dozent', $sem_id_projektbereich);
         
         $this->edit_link_internnews = URLHelper::getLink("dispatch.php/news/edit_news/new/". $sem_id_mitarbeiterinnen);
         $this->edit_link_projectnews = URLHelper::getLink("dispatch.php/news/edit_news/new/" . $sem_id_projektbereich);

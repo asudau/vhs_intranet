@@ -123,9 +123,11 @@
             <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/Informationen.png") ?>" alt="" border="0" width="100%">
 			<h2 class="intranet">
                     <a href="" title="Opens internal link in current window" class="internal-link">Interne Informationen</a>
+                    <? if ($mitarbeiter_admin){ ?>
                     <a style="margin-left: 68%;" href="<?=$edit_link_internnews?>" rel="get_dialog">
                         <img src="/assets/images/icons/blue/add.svg" alt="add" class="icon-role-clickable icon-shape-add" width="16" height="16">            
                     </a>
+                    <? } ?>
             </h2>
 
             <?= $this->render_partial($internnewstemplate, compact('widget')) ?>
@@ -143,9 +145,11 @@
         <div style="position:relative">
        <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/Projektbereich.png") ?>" alt="" border="0" width="100%">
 			<h2 class="intranet"><a href="" title="Opens internal link in current window" class="internal-link">Neues aus dem Projektbereich</a>
-            <a style="margin-left: 58%;" href="<?=$edit_link_projectnews?>" rel="get_dialog">
-                <img src="/assets/images/icons/blue/add.svg" alt="add" class="icon-role-clickable icon-shape-add" width="16" height="16">            
-            </a>
+                 <? if ($mitarbeiter_admin){ ?>
+                    <a style="margin-left: 58%;" href="<?=$edit_link_projectnews?>" rel="get_dialog">
+                        <img src="/assets/images/icons/blue/add.svg" alt="add" class="icon-role-clickable icon-shape-add" width="16" height="16">            
+                    </a>
+                 <? } ?>
             </h2>
         <?= $this->render_partial($projectnewstemplate, compact('widget')) ?>
         <hr>
