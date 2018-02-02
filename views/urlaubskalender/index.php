@@ -36,7 +36,7 @@
     <?    
     if($dates){
         foreach($dates as $d){
-            echo "{id:".$d->getValue('id') . ", text:\"" . \Studip_User::find_by_user_id($d->getValue('user_id'))->fullname . "\",start_date:\"" . $d->getValue('begin') . "\",end_date:\"" . $d->getValue('end') . "\", color:\"". $controller->color_by_crossfoot($d->getValue('id')) . "\"}," ;
+            echo "{id:".$d->getValue('id') . ", text:\"" . \Studip_User::find_by_user_id($d->getValue('user_id'))->fullname . "\",start_date:\"" . date("m/d/Y", strtotime($d->getValue('begin'))) . "\",end_date:\"" . date("m/d/Y", strtotime($d->getValue('end') . " + 1 day")) . "\", color:\"". $controller->color_by_crossfoot($d->getValue('id')) . "\"}," ;
         }
     }
     ?>    

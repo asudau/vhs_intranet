@@ -13,9 +13,9 @@
 
             <input type="hidden" name="user_id" value="<?= $user_id ? $user_id : "" ?>" id="user_id"></input><br>
             
-           
-                <label> Urlaubsbeginn: </label><input type="" name="begin" value="<?= $entry->getValue('begin') ?>"></input><br>
-                <label> Urlaubsende:</label> <input type="" name="end" value="<?= $entry->getValue('end') ?>"></input>
+                <label> Urlaubsbeginn: </label>
+                <input required type="text" id="beginn" name="begin" data-date-picker='{"<":"#ende"}' value="<?= $entry->getValue('begin') ?>"></input><br>
+                <label> Urlaubsende:</label> <input id="ende" data-date-picker='{">":"#beginn"}' type="" name="end" value="<?= $entry->getValue('end') ?>"></input>
                 <label> Hinweis/Notiz:</label> <input type="" name="notice" value="<?= $entry->getValue('notice') ?>"></input>
             <?= Button::createAccept(_('Änderung speichern'), 'submit') ?>
             <?= LinkButton::create(_("Löschen"), $controller->url_for('urlaubskalender/delete/'.$entry->getValue('id')), array('onClick' => "return window.confirm('"._("Wirklich löschen?")."');"))?>

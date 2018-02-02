@@ -34,11 +34,15 @@
 
                 <?= $quick_search->render();
             ?>
-            <div name="add_username" id="add_username"></div>
+            <br>
+            <h2 name="add_username" id="add_username"></h2>
             <input type="hidden" name="user_id" value="" id="user_id"></input><br>
-            <label> Urlaubsbeginn: </label><input type="" name="begin" value=""></input><br>
-            <label> Urlaubsende:</label> <input type="" name="end" value=""></input>
-            <label> Hinweis/Notiz:</label> <input type="" name="notice" value=""></input>
+            <div id='holidays' style="display:none;">
+                <label> Urlaubsbeginn: </label>
+                <input required type="text" id="beginn" name="begin" data-date-picker='{"<":"#ende"}' value=""></input><br>
+                <label> Urlaubsende:</label> <input id="ende" data-date-picker='{">":"#beginn"}' type="" name="end" value="<?= date('d.m.Y', time()) ?>"></input>
+                <label> Hinweis/Notiz:</label> <input type="" name="notice" value=""></input>
+            </div>
         </fieldset>
       
           <?= Button::createAccept(_('Speichern'), 'submit') ?>
@@ -59,6 +63,6 @@ $sidebar->setImage(Assets::image_path("sidebar/info-sidebar.png"));
     var select_user = function (user_id, fullname) {
         document.getElementById("add_username").innerHTML = fullname;
         jQuery('#user_id').val(user_id);
-        //$(this).closest("form").submit();
+        document.getElementById("holidays").style.display = "initial"; 
     };                                    
 </script>
