@@ -15,7 +15,31 @@
 				<!--<div align="center"><a href="index.php?id=146"><img src="/fileadmin/template/img/suche2.png" alt=""></a></div>
 				<br>
 
-               
+               	 <!--  CONTENT ELEMENT, uid:73/textpic [begin] -->
+                <div id="c73" class="csc-default csc-space-after-25">
+                <!--  Image block: [begin] -->
+                    <div class="csc-textpic-text">
+                <!--  Text: [begin] -->
+                    <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/Kursstart.png") ?>" alt="" border="0" width="100%">
+                    <h2 class="intranet"><a href="index.php?id=35" title="Opens internal link in current window" class="internal-link">Meine Gruppen/Mein Arbeitsbereich</a></h2>
+                    <? foreach ($courses as $course){ ?>
+                    <section class="contentbox course">
+                        <a href='<?=URLHelper::getLink("/seminar_main.php?auswahl=" . $course['Seminar_id'] )?>'><?= $course['Name'] ?></a></section>
+                        
+                    <?}
+                    
+                    if (count($courses) > 6){
+                    ?>
+                        <a class="all_courses" href="#"></a>
+                    <?}
+
+                    ?>
+                    <hr>
+                    <!--  Text: [end] -->
+                    </div>
+                    <!--  Image block: [end] -->
+                </div>
+                <!--  CONTENT ELEMENT, uid:73/textpic [end] -->
 
                 <!--  CONTENT ELEMENT, uid:14/textpic [begin] -->
                 <div id="c14" class="csc-default csc-space-after-25">
@@ -49,9 +73,7 @@
                 <!--  Text: [begin] -->
                      <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/kalender1.png") ?>" alt="" border="0" width="100%">
                      <h2 class="intranet"> <a href="<?=$GLOBALS['ABSOLUTE_URI_STUDIP']. 'plugins.php/IntranetMitarbeiterInnen/urlaubskalender/'?>" title="Opens internal link in current window" class="internal-link">Urlaubskalender</a></h2>
-                        <p class="bodytext">Wie aktuell in der Landespolitik und Bundespolitik hat auch im Ammerland die Stärkung der Berufsorientierung an allen Schulformen sowie die Integration benachteiligter Jugendlicher in duale Berufsausbildung absolute Priorität. 
-                        </p>
-                        <p class="bodytext"><a href="" title="Opens internal link in current window" class="internal-link">Mehr Angaben zum Projekt</a><br><br>
+                        <p class="bodytext">
                         </p>
                     
                 <!--  Text: [end] -->
@@ -91,29 +113,7 @@
 				
 			</div>
 			<div class="haupt">
-	
-		 <!--  CONTENT ELEMENT, uid:73/textpic [begin] -->
-                <div id="c73" class="csc-default csc-space-after-25">
-                <!--  Image block: [begin] -->
-                    <div class="csc-textpic-text">
-                <!--  Text: [begin] -->
-                    <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/Kursstart.png") ?>" alt="" border="0" width="100%">
-                    <h2 class="intranet"><a href="index.php?id=35" title="Opens internal link in current window" class="internal-link">Meine Gruppen/Mein Arbeitsbereich</a></h2>
-                    <? foreach ($courses as $course){ ?>
-                    <section class="contentbox course">
-                        <a href='<?=URLHelper::getLink("/seminar_main.php?auswahl=" . $course['Seminar_id'] )?>'><?= $course['Name'] ?></a></section>
-                        
-                    <?}?>
-                    <a class="all_courses" href="#"></a>
-                    
-                    <hr>
-                    <!--  Text: [end] -->
-                    </div>
-                    <!--  Image block: [end] -->
-                </div>
-                <!--  CONTENT ELEMENT, uid:73/textpic [end] -->
-                
-                
+	       
                 
 	<!--  CONTENT ELEMENT, uid:434/textpic [begin] -->
 		<div id="c434" class="intranet_news csc-default csc-space-after-25">
@@ -154,6 +154,8 @@
     </div>
 	<!--  CONTENT ELEMENT, uid:71/text [end] -->
 		
+    
+    <? if (count($courses_upcoming) >0 ){ ?>
 	<!--  CONTENT ELEMENT, uid:13/textpic [begin] -->
 		<div id="c13" class="csc-default csc-space-after-25">
 		<!--  Image block: [begin] -->
@@ -161,16 +163,20 @@
 		<!--  Text: [begin] -->
             <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/Kursstart.png") ?>" alt="" border="0" width="100%">
 			<h2 class="intranet"> <a href="index.php?id=21" title="Opens internal link in current window" class="internal-link">Kurse die demnächst starten</a></h2>
-<p class="bodytext">Wie aktuell in der Landespolitik und Bundespolitik hat auch im Ammerland die Stärkung der Berufsorientierung an allen Schulformen sowie die Integration benachteiligter Jugendlicher in duale Berufsausbildung absolute Priorität. 
-</p>
-<p class="bodytext"><a href="index.php?id=21" title="Opens internal link in current window" class="internal-link">Mehr Angaben zum Projekt</a><br><br>
-</p>
-<hr>
+             <? foreach ($courses_upcoming as $course){ ?>
+                    <section class="contentbox course">
+                        <a href='<?=URLHelper::getLink("/seminar_main.php?auswahl=" . $course['Seminar_id'] )?>'><?= $course['Name'] . "  (" . date('d.m.Y', $course['start_time']) . ")" ?></a> </section>
+
+              <?} ?>
+            <hr>
 		<!--  Text: [end] -->
 			</div>
 		<!--  Image block: [end] -->
 			</div>
 	<!--  CONTENT ELEMENT, uid:13/textpic [end] -->
+    <? } ?>
+    
+    
 		
 		</div></div>
 		</div>

@@ -197,6 +197,17 @@ class StartController extends StudipController
         
         
 
+         //get upcoming courses
+        $statement = DBManager::get()->prepare("SELECT s.Seminar_id, s.Name, s.start_time "
+                . "FROM seminare as s "
+                . "WHERE s.start_time > " . time() . " " 
+                . "ORDER BY s.start_time ASC "
+                . "LIMIT 20");
+
+        $statement->execute();
+        $this->courses_upcoming = $statement->fetchAll(PDO::FETCH_ASSOC);
+        
+        
         
         
         if ($GLOBALS['perm']->get_perm() == 'user') {
