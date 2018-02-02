@@ -59,6 +59,7 @@ class StartController extends StudipController
         
         $this->edit_link_internnews = URLHelper::getLink("dispatch.php/news/edit_news/new/". $sem_id_mitarbeiterinnen);
         $this->edit_link_projectnews = URLHelper::getLink("dispatch.php/news/edit_news/new/" . $sem_id_projektbereich);
+        $this->edit_link_files = URLHelper::getLink("folder.php?cid=" . $sem_id_projektbereich . "&cmd=tree");
         
         //get intern news
         $dispatcher = new StudipDispatcher();
@@ -84,11 +85,12 @@ class StartController extends StudipController
                 . "FROM seminare as s "
                 . "LEFT JOIN object_user_visits as ouv ON (s.Seminar_id = ouv.object_id) "
                 . "WHERE ouv.user_id = :user_id "
+                . "AND s.Seminar_id NOT IN (:int_ma, :int_pb) "
                 . "AND ouv.type = 'sem' "
                 . "AND s.Seminar_id in "
                 . "(SELECT su.Seminar_id FROM seminar_user as su WHERE su.user_id = :user_id) ORDER BY ouv.visitdate DESC");
 
-        $statement->execute(array(':user_id' => $GLOBALS['user']->id));
+        $statement->execute([':user_id' => $GLOBALS['user']->id, ':int_ma' => $sem_id_mitarbeiterinnen, ':int_pb' => $sem_id_projektbereich,]);
         $this->courses = $statement->fetchAll(PDO::FETCH_ASSOC);
         
         
