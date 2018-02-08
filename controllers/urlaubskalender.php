@@ -228,7 +228,7 @@ class UrlaubskalenderController extends StudipController
                             . "LEFT JOIN user_info ON (auth_user_md5.user_id = user_info.user_id) "
                             . "LEFT JOIN seminar_user ON (auth_user_md5.user_id = seminar_user.user_id) "
                             . "WHERE "
-                            . "seminar_user.Seminar_id LIKE ". $this->id . " "
+                            . "seminar_user.Seminar_id LIKE '". $this->id . "' "
                             . "AND (username LIKE :input OR Vorname LIKE :input "
                             . "OR CONCAT(Vorname,' ',Nachname) LIKE :input "
                             . "OR CONCAT(Nachname,' ',Vorname) LIKE :input "
