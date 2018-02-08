@@ -8,8 +8,7 @@
  * published by the Free Software Foundation; either version 2 of
  * the License, or (at your option) any later version.
  *
- * @author   André Klaßen <klassen@elan-ev.de>
- * @author   Nadine Werner <nadine.werner@uni-osnabrueck.de>
+ * @author   Annelene Sudau <sudau@elan-ev.de>
  * @license  http://www.gnu.org/licenses/gpl-2.0.html GPL version 2
  * @category Stud.IP
  * @since    3.1
@@ -123,67 +122,6 @@ class StartController extends StudipController
         }
         
         
-        
-        
-        
-        /**
-        $this->left = WidgetHelper::getUserWidgets($GLOBALS['user']->id, 0);
-        $this->right = WidgetHelper::getUserWidgets($GLOBALS['user']->id, 1);
-
-        if (!(count($this->left) + count($this->right)) ) {
-            WidgetHelper::setInitialPositions();
-            $this->left = WidgetHelper::getUserWidgets($GLOBALS['user']->id, 0);
-            $this->right = WidgetHelper::getUserWidgets($GLOBALS['user']->id, 1);
-        }
-
-        WidgetHelper::setActiveWidget(Request::get('activeWidget'));
-
-        
-            $sidebar = Sidebar::get();
-            $sidebar->setImage('sidebar/home-sidebar.png');
-            $sidebar->setTitle(_("Meine Startseite"));
-
-            $nav = new NavigationWidget();
-            $nav->setTitle(_('Sprungmarken'));
-            foreach (array_merge($this->left, $this->right) as $widget) {
-                $nav->addLink($widget->getPluginName(),
-                              $this->url_for('start#widget-' . $widget->widget_id));
-            }
-            $sidebar->addWidget($nav);
-
-            // Show action to add widget only if not all widgets have already been added.
-            $actions = new ActionsWidget();
-
-            if (WidgetHelper::getAvailableWidgets($GLOBALS['user']->id)) {
-                $actions->addLink(_('Widgets hinzufügen'),
-                                  $this->url_for('start/add'),
-                                  Icon::create('add', 'clickable'))
-                        ->asDialog();
-            }
-
-            $actions->addLink(_('Standard wiederherstellen'),
-                              $this->url_for('start/reset'),
-                              Icon::create('accept', 'clickable'));
-            $sidebar->addWidget($actions);
-
-            // Root may set initial positions
-            if ($GLOBALS['perm']->have_perm('root')) {
-                $settings = new ActionsWidget();
-                $settings->setTitle(_('Einstellungen'));
-                $settings->addElement(new WidgetElement(_('Standard-Startseite bearbeiten:')));
-                foreach ($GLOBALS['perm']->permissions as $permission => $useless) {
-                    $settings->addElement(new LinkElement(
-                        ucfirst($permission),
-                        $this->url_for('start/edit_defaults/' . $permission),
-                        Icon::create('link-intern', 'clickable'), array('data-dialog' => '')
-                    ));
-                }
-
-                $sidebar->addWidget($settings);
-            }
-       **/
-        
-        
          //get project news
         $dispatcher = new StudipDispatcher();
         $controller = new NewsController($dispatcher);
@@ -204,234 +142,96 @@ class StartController extends StudipController
         
 
          //get upcoming courses
-        $statement = DBManager::get()->prepare("SELECT s.Seminar_id, s.Name, s.start_time "
-                . "FROM seminare as s "
-                . "WHERE s.start_time > " . time() . " " 
-                . "ORDER BY s.start_time ASC "
-                . "LIMIT 20");
-
-        $statement->execute();
-        $this->courses_upcoming = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $result = EventData::findBySQL("category_intern = '13' AND start > '" . time() . "' ORDER BY start ASC");
+       
         
+        $this->courses_upcoming = $result;
         
+        /**
+        $ch = curl_init();
+        $url = 'https://www.kvhs-ammerland.de/index.php?id=144&kathaupt=6&suchesetzen=true';
         
+        // set post fields
+        $post = [
+            'kfs_stichwort' => '%%%',
+            'kfs_aussenst_select' => '-1',
+            'kfs_kursbereich' => '-1',
+            'kfs_sonderrubrik' => '-1',
+            'kfs_beginn_dat1' => '05.02.2018',
+            'kfs_beginn_dat2' => '12.02.2018',
+            'kfs_wo_all' => 'true',
+            'kfs_zr' => 'true',
+        ];
         
-        if ($GLOBALS['perm']->get_perm() == 'user') {
-            PageLayout::postMessage(MessageBox::info(_('Sie haben noch nicht auf Ihre Bestätigungsmail geantwortet.'),
-                array(
-                    _('Bitte holen Sie dies nach, um Stud.IP Funktionen wie das Belegen von Veranstaltungen nutzen zu können.'),
-                    sprintf(_('Bei Problemen wenden Sie sich an: %s'), '<a href="mailto:'.$GLOBALS['UNI_CONTACT'].'">'.$GLOBALS['UNI_CONTACT'].'</a>')
-                )
-            ));
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 
-            PageLayout::postMessage(MessageBox::info(
-                    sprintf(_('Haben Sie die Bestätigungsmail an Ihre Adresse "%s" nicht erhalten?'), htmlReady($GLOBALS['user']->Email)),
-                    array(
-                        Studip\LinkButton::create(_('Bestätigungsmail erneut verschicken'),
-                            $this->url_for('start/resend_validation_mail')
-                        ) . ' '
-                        . Studip\LinkButton::create(_('Email-Adresse ändern'),
-                            $this->url_for('start/edit_mail_address'), array(
-                                'data-dialog' => "size=auto",
-                                'title'       => _('Email-Adresse')
-                            )
-                        ),
-                    )
-            ));
-        }
-    }
+        $data = curl_exec($ch);
+        curl_close($ch);
+        
+        $doc = new \DOMDocument();
 
-    /**
-     *  This action adds one or more new widgets to the start page
-     *
-     * @return void
-     */
-    public function add_action()
-    {
-        PageLayout::setTitle(_('Widgets hinzufügen'));
+        libxml_use_internal_errors(true);
 
-        if (Request::isPost()) {
-            $ticket   = Request::get('studip_ticket');
-            $widgets  = Request::intArray('widget_id');
-            $position = Request::int('position');
-
-            $post_url = '';
-            if (check_ticket($ticket)) {
-                foreach ($widgets as $widget) {
-                    $id = WidgetHelper::addWidget($widget, $GLOBALS['user']->id);
-                    if (!$post_url) {
-                        $post_url = '#widget-' . $id;
-                    }
+        if (!$doc->loadHTML($data))
+            {
+                $errors="";
+                foreach (libxml_get_errors() as $error)  {
+                    $errors.=$error->message."<br/>";
                 }
-            }
-            $this->redirect('start' . $post_url);
-        }
-        $this->widgets = WidgetHelper::getAvailableWidgets($GLOBALS['user']->id);
-    }
+                libxml_clear_errors();
+                print "libxml errors:<br>$errors";
 
-
-    /**
-     * Edit the default startpage configuration for users by permissions
-     *
-     * @param string $permission
-     *
-     * @throws InvalidArgumentException
-     */
-    public function edit_defaults_action($permission)
-    {
-        if (in_array($permission, array_keys($GLOBALS['perm']->permissions)) === false) {
-            throw new InvalidArgumentException('There is no such permission!');
-        }
-
-        PageLayout::setTitle(sprintf(_('Standard-Startseite für "%s" bearbeiten'), ucfirst($permission)));
-
-        $this->widgets = WidgetHelper::getAvailableWidgets();
-        $this->permission = $permission;
-
-        $this->initial_widgets = WidgetHelper::getInitialPositions($permission);
-        $available_plugin_ids = array_keys($this->widgets);
-        $this->initial_widgets[0] = array_intersect((array)$this->initial_widgets[0], $available_plugin_ids);
-        $this->initial_widgets[1] = array_intersect((array)$this->initial_widgets[1], $available_plugin_ids);
-
-    }
-
-    /**
-     * Store the edited default startpage configuration for users by permissions
-     *
-     * @param string $permission
-     *
-     * @throws InvalidArgumentException
-     */
-    public function update_defaults_action($permission)
-    {
-        $GLOBALS['perm']->check('root');
-
-        if (in_array($permission, array_keys($GLOBALS['perm']->permissions)) === false) {
-            throw new InvalidArgumentException('There is no such permission!');
-        }
-
-        WidgetHelper::storeInitialPositions(0, Request::getArray('left'), $permission);
-        WidgetHelper::storeInitialPositions(1, Request::getArray('right'), $permission);
-
-        $this->render_nothing();
-    }
-
-    /**
-     *  This actions removes a new widget from the start page
-     *
-     * @param string $widgetId
-     * @param string $approveDelete
-     * @param string $studipticket
-     *
-     * @return void
-     */
-    function delete_action($id)
-    {
-        if (Request::isPost()) {
-            if (Request::submitted('yes')) {
-                $name = WidgetHelper::getWidgetName($id);
-                if (WidgetHelper::removeWidget($id, $name, $GLOBALS['user']->id)) {
-                    $message = sprintf(_('Widget "%s" wurde entfernt.'), $name);
-                    PageLayout::postMessage(MessageBox::success($message));
-                } else {
-                    $message = sprintf(_('Widget "%s" konnte nicht entfernt werden.'), $name);
-                    PageLayout::postMessage(MessageBox::error($message));
-                }
-            }
         } else {
-            $message = sprintf(_('Sind Sie sicher, dass Sie das Widget "%s" von der Startseite entfernen möchten?'),
-                               WidgetHelper::getWidgetName($id));
-            $this->flash['question'] = createQuestion2($message, array(), array(), $this->url_for('start/delete/' . $id));
+
+        $xpath = new \DOMXpath($doc);
+        $output = $xpath->query('//div[contains(@class, "doz_kurs")]');
+        //$doc->getElementsByClassName('doz_kursliste')->textContent;
+        
+        $this->courses_upcoming = $output;
         }
-        $this->redirect('start');
+        **/
+           
     }
+    
+    
+      function insertCoursebegin_action($id = ''){
+        
+          //speichern
+        if ($_POST['submit']){
+            $this->event = new EventData($id);
+            $this->event->author_id = $GLOBALS['user']->id;
+            $this->event->start = strtotime($_POST['start_date']);
+            $this->event->end = $this->event->start;
+            $this->event->summary = studip_utf8decode($_POST['summary']);
+            $this->event->description = $_POST['description'];
+            $this->event->class = 'PUBLIC';
+            $this->event->category_intern = '13';
 
-    /**
-     * Resets widget to initial default state.
-     */
-    public function reset_action()
-    {
-        $widgets = array_merge(
-            WidgetHelper::getUserWidgets($GLOBALS['user']->id, 0),
-            WidgetHelper::getUserWidgets($GLOBALS['user']->id, 1)
-        );
-
-        foreach ($widgets as $widget) {
-            $name = WidgetHelper::getWidgetName($widget->widget_id);
-            WidgetHelper::removeWidget($widget->widget_id, $name, $GLOBALS['user']->id);
+            $this->event->store();
+            
+             if (Request::isXhr()) {
+                    header('X-Dialog-Close: 1');
+                    exit;
+             } else $this->redirect($this->url_for('/start'));
+        
+        //bearbeiten
+        } else if ($id){
+            
+            $this->event = new EventData($id);
+        
+        // neu anlegen
+        } else {
+            $this->event = new EventData();
+            $this->event->event_id = $this->event->getNewId();
+            $this->event->start = time();
+            $this->event->summary = 'Kurstitel';
+            $this->event->description = 'http://';
         }
-
-        WidgetHelper::setInitialPositions();
-
-        $message = _('Die Widgets wurden auf die Standardkonfiguration zurückgesetzt.');
-        PageLayout::postMessage(MessageBox::success($message));
-        $this->redirect('start');
-    }
-
-    /**
-     *  Action to store the widget placements
-     *
-     * @return void
-     */
-    function storeNewOrder_action()
-    {
-        WidgetHelper::storeNewPositions(Request::get('widget'), Request::get('position'), Request::get('column'));
-        $this->render_nothing();
-    }
-
-    /**
-     * Resend the validation mail for the current user
-     *
-     * @return void
-     */
-    function resend_validation_mail_action()
-    {
-        if ($GLOBALS['perm']->get_perm() == 'user') {
-            Seminar_Register_Auth::sendValidationMail($GLOBALS['user']);
-            PageLayout::postMessage(MessageBox::success(
-                _('Die Bestätigungsmail wurde erneut verschickt.')
-            ));
-        }
-
-        $this->redirect('start');
-    }
-
-    /**
-     * Show form to change the mail-address for the validation mail
-     *
-     * @return void
-     */
-    function edit_mail_address_action()
-    {
-        // only allow editing of mail-address here if user has not yet validated
-        if ($GLOBALS['perm']->get_perm() != 'user') {
-            $this->redirect('start');
-            return;
-        }
-
-        $this->email = $GLOBALS['user']->Email;
-    }
-
-    /**
-     * Change the mail-address and resend validation mail
-     *
-     * @return void
-     */
-    function change_mail_address_action()
-    {
-        if ($GLOBALS['perm']->get_perm() == 'user') {
-            $user = new User($GLOBALS['user']->id);
-            $user->Email = Request::get('email');
-            $user->store();
-
-            $GLOBALS['user']->Email = $user->Email;
-
-            Seminar_Register_Auth::sendValidationMail($user);
-            PageLayout::postMessage(MessageBox::success(
-                _('Ihre Mailadresse wurde geändert und die Bestätigungsmail erneut verschickt.')
-            ));
-        }
-
-        $this->redirect('start');
+        //$this->setProperties($calendar_event, $component);
+        //$calendar_event->setRecurrence($component['RRULE']);
     }
 }
