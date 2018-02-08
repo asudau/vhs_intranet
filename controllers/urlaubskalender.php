@@ -164,11 +164,13 @@ class UrlaubskalenderController extends StudipController
         $search_obj = new SQLSearch("SELECT auth_user_md5.user_id, CONCAT(auth_user_md5.nachname, ', ', auth_user_md5.vorname, ' (' , auth_user_md5.email, ')' ) as fullname, username, perms "
                             . "FROM auth_user_md5 "
                             . "LEFT JOIN user_info ON (auth_user_md5.user_id = user_info.user_id) "
+                            . "LEFT JOIN seminar_user ON (auth_user_md5.user_id = seminar_user.user_id) "
                             . "WHERE "
-                            . "username LIKE :input OR Vorname LIKE :input "
+                            . "seminar_user.Seminar_id LIKE '". $this->id . "' "
+                            . "AND (username LIKE :input OR Vorname LIKE :input "
                             . "OR CONCAT(Vorname,' ',Nachname) LIKE :input "
                             . "OR CONCAT(Nachname,' ',Vorname) LIKE :input "
-                            . "OR Nachname LIKE :input OR {$GLOBALS['_fullname_sql']['full_rev']} LIKE :input "
+                            . "OR Nachname LIKE :input OR {$GLOBALS['_fullname_sql']['full_rev']} LIKE :input) "
                             . " ORDER BY fullname ASC",
                 _('Nutzer suchen'), 'user_id');
         $this->quick_search = QuickSearch::get('user_id', $search_obj)
@@ -224,11 +226,13 @@ class UrlaubskalenderController extends StudipController
         $search_obj = new SQLSearch("SELECT auth_user_md5.user_id, CONCAT(auth_user_md5.nachname, ', ', auth_user_md5.vorname, ' (' , auth_user_md5.email, ')' ) as fullname, username, perms "
                             . "FROM auth_user_md5 "
                             . "LEFT JOIN user_info ON (auth_user_md5.user_id = user_info.user_id) "
+                            . "LEFT JOIN seminar_user ON (auth_user_md5.user_id = seminar_user.user_id) "
                             . "WHERE "
-                            . "username LIKE :input OR Vorname LIKE :input "
+                            . "seminar_user.Seminar_id LIKE ". $this->id . " "
+                            . "AND (username LIKE :input OR Vorname LIKE :input "
                             . "OR CONCAT(Vorname,' ',Nachname) LIKE :input "
                             . "OR CONCAT(Nachname,' ',Vorname) LIKE :input "
-                            . "OR Nachname LIKE :input OR {$GLOBALS['_fullname_sql']['full_rev']} LIKE :input "
+                            . "OR Nachname LIKE :input OR {$GLOBALS['_fullname_sql']['full_rev']} LIKE :input) "
                             . " ORDER BY fullname ASC",
                 _('Nutzer suchen'), 'user_id');
         $this->quick_search = QuickSearch::get('user_id', $search_obj)
