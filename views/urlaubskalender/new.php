@@ -26,7 +26,7 @@
     
     <form action="<?= $controller->url_for('urlaubskalender/save/') ?>" class="studip_form" method="POST">
         <fieldset>
-
+            <? if ($mitarbeiter_admin){ ?>
             <label for="student_search" class="caption">
                 <?= _('MitarbeiterIn suchen')?>
                 <?= Icon::create('info-circle', 'info', array('title' => $help))?>
@@ -34,13 +34,14 @@
 
                 <?= $quick_search->render();
             ?>
+            <? } ?>
             <br>
-            <h2 name="add_username" id="add_username"></h2>
-            <input type="hidden" name="user_id" value="" id="user_id"></input><br>
-            <div id='holidays' style="display:none;">
+            <h2 name="add_username" id="add_username"><?= (!$mitarbeiter_admin) ? $GLOBALS['user']->vorname . ' ' . $GLOBALS['user']->nachname : '' ?></h2>
+            <input type="hidden" name="user_id" value="<?= (!$mitarbeiter_admin) ? $GLOBALS['user']->id : '' ?>" id="user_id"></input><br>
+            <div id='holidays' style="<?= (!$mitarbeiter_admin) ? '' : 'display:none;' ?>">
                 <label> Urlaubsbeginn: </label>
                 <input required type="text" id="beginn" name="begin" data-date-picker='{"<":"#ende"}' value=""></input><br>
-                <label> Urlaubsende:</label> <input id="ende" data-date-picker='{">":"#beginn"}' type="" name="end" value="<?= date('d.m.Y', time()) ?>"></input>
+                <label> Urlaubsende:</label> <input id="ende" data-date-picker='{">":"#beginn"}' type="" name="end" value=""></input>
                 <label> Hinweis/Notiz:</label> <input type="" name="notice" value=""></input>
             </div>
         </fieldset>

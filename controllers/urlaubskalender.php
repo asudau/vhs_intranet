@@ -47,8 +47,10 @@ class UrlaubskalenderController extends StudipController
      */
     function index_action($action = false, $widgetId = null)
     {
+        global $perm;
         $sem_id_mitarbeiterinnen = Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN');
         //$sem_id_mitarbeiterinnen = '9fc5dd6a84acf0ad76d2de71b473b341';
+        $this->mitarbeiter_admin = $perm->have_studip_perm('dozent', $sem_id_mitarbeiterinnen);
 
             $sidebar = Sidebar::get();
             $sidebar->setImage('sidebar/home-sidebar.png');
@@ -71,7 +73,7 @@ class UrlaubskalenderController extends StudipController
                               Icon::create('add', 'clickable'));
             
             $actions->addLink(_('Urlaubstermine bearbeiten'),
-                              $this->url_for('urlaubskalender/edit'),
+                              $this->url_for('urlaubskalender/'. (!$this->mitarbeiter_admin ? ('edituser/'.$GLOBALS['user']->id) : 'edit')),
                               Icon::create('edit', 'clickable'));
             $sidebar->addWidget($actions);
             
@@ -128,7 +130,8 @@ class UrlaubskalenderController extends StudipController
     {
         PageLayout::setTitle(_('Neuen Urlaubstermin eintragen'));
         $this->id = Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN');
-        //$this->id = '9fc5dd6a84acf0ad76d2de71b473b341';
+        global $perm;
+        $this->mitarbeiter_admin = $perm->have_studip_perm('dozent', $this->id);
         
          $sidebar = Sidebar::get();
             $sidebar->setImage('sidebar/home-sidebar.png');
@@ -150,7 +153,7 @@ class UrlaubskalenderController extends StudipController
                               Icon::create('add', 'clickable'));
             
             $actions->addLink(_('Urlaubstermine bearbeiten'),
-                              $this->url_for('urlaubskalender/edit'),
+                              $this->url_for('urlaubskalender/'. (!$this->mitarbeiter_admin ? ('edituser/'.$GLOBALS['user']->id) : 'edit')),
                               Icon::create('edit', 'clickable'));
 
             $sidebar->addWidget($actions);
@@ -186,7 +189,8 @@ class UrlaubskalenderController extends StudipController
     {
         PageLayout::setTitle(_('Neuen Urlaubstermin eintragen'));
         $this->id = Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN');
-        //$this->id = '9fc5dd6a84acf0ad76d2de71b473b341';
+         global $perm;
+        $this->mitarbeiter_admin = $perm->have_studip_perm('dozent', $this->id);
         
          $sidebar = Sidebar::get();
             $sidebar->setImage('sidebar/home-sidebar.png');
@@ -208,9 +212,9 @@ class UrlaubskalenderController extends StudipController
                               Icon::create('add', 'clickable'));
             
             $actions->addLink(_('Urlaubstermine bearbeiten'),
-                              $this->url_for('urlaubskalender/edit'),
+                              $this->url_for('urlaubskalender/'. (!$this->mitarbeiter_admin ? ('edituser/'.$GLOBALS['user']->id) : 'edit')),
                               Icon::create('edit', 'clickable'));
-
+            
             $sidebar->addWidget($actions);
        
         
@@ -245,7 +249,8 @@ class UrlaubskalenderController extends StudipController
     {
         PageLayout::setTitle(_('Neuen Urlaubstermin eintragen'));
         $this->id = Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN');
-        //$this->id = '9fc5dd6a84acf0ad76d2de71b473b341';
+         global $perm;
+        $this->mitarbeiter_admin = $perm->have_studip_perm('dozent', $this->id);
         
          $sidebar = Sidebar::get();
             $sidebar->setImage('sidebar/home-sidebar.png');
@@ -267,14 +272,14 @@ class UrlaubskalenderController extends StudipController
                               Icon::create('add', 'clickable'));
             
             $actions->addLink(_('Urlaubstermine bearbeiten'),
-                              $this->url_for('urlaubskalender/edit'),
+                              $this->url_for('urlaubskalender/'. (!$this->mitarbeiter_admin ? ('edituser/'.$GLOBALS['user']->id) : 'edit')),
                               Icon::create('edit', 'clickable'));
 
             $sidebar->addWidget($actions);
        
         
         
-        $this->user_id = $_POST['user_id'];
+        $this->user_id = $id ? $id : $_POST['user_id'];
         $this->entries = MAHoliday::findBySQL('user_id = ? ORDER BY begin ASC',
                     array($this->user_id));
         

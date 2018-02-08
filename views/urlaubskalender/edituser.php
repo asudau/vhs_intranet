@@ -24,10 +24,14 @@
       
           
     </form>
-    <? }
-    }?>
+    <? }?>
+    
 
     <?= LinkButton::createCancel(_('Abbrechen'), $controller->url_for('urlaubskalender/')) ?>
+    <? } else{ ?>
+    <h2> Noch keine Urlaubstermine vorhanden </h2>
+    <? }?>
+    
     
 </div>
 
