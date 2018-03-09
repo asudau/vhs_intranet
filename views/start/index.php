@@ -173,7 +173,7 @@
 			<div class="csc-textpic-text">
 		<!--  Text: [begin] -->
             <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/Kursstart.png") ?>" alt="" border="0" width="100%">
-			<h2 class="intranet"> <a href="index.php?id=21" title="Opens internal link in current window" class="internal-link">Kurse die demnächst starten</a>
+			<h2 class="intranet"> <a href="index.php?id=21" title="Opens internal link in current window" class="internal-link">Kurse, die demnächst starten</a>
                 <? if ($mitarbeiter_admin){ ?>
                     <a style="margin-left: 58%;" href="<?= $this->controller->url_for('start/insertCoursebegin')?>" rel="get_dialog">
                         <img src="/assets/images/icons/blue/add.svg" alt="add" class="icon-role-clickable icon-shape-add" width="16" height="16">            
@@ -181,7 +181,7 @@
                  <? } ?>        
             </h2>
             <? foreach ($courses_upcoming as $course){ ?>
-                    <section class="contentbox course">
+                    <section class="contentbox">
                         
                         <? if ($mitarbeiter_admin){ ?>
                             <a href="<?= $this->controller->url_for('start/insertCoursebegin/' . $course['event_id'])?>" rel="get_dialog">
