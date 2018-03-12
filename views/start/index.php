@@ -125,7 +125,7 @@
 	<!--  CONTENT ELEMENT, uid:434/textpic [begin] -->
 		<div id="c434" class="intranet_news csc-default csc-space-after-25">
 		<!--  Image block: [begin] -->
-			<div class="csc-textpic csc-textpic-intext-right csc-textpic-equalheight"><div class="csc-textpic-imagewrap"><div class="csc-textpic-image csc-textpic-last"><a href="index.php?id=129"><img src="fileadmin/_processed_/csm_Ide_gruen_web_4a9b5b6b7f.png" alt="" border="0" width="196" height="120"></a></div></div><div class="csc-textpic-text">
+			<div class="csc-textpic csc-textpic-intext-right csc-textpic-equalheight"><div class="csc-textpic-text">
 		<!--  Text: [begin] -->
             <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/Informationen.png") ?>" alt="" border="0" width="100%">
 			<h2 class="intranet">
