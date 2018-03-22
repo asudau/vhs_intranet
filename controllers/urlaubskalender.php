@@ -131,7 +131,7 @@ class UrlaubskalenderController extends StudipController
         PageLayout::setTitle(_('Neuen Urlaubstermin eintragen'));
         $this->id = Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN');
         global $perm;
-        $this->mitarbeiter_admin = $perm->have_studip_perm('dozent', $this->id);
+        $this->mitarbeiter_admin = $perm->have_studip_perm('tutor', $this->id);
         
          $sidebar = Sidebar::get();
             $sidebar->setImage('sidebar/home-sidebar.png');
