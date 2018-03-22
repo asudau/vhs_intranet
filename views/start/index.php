@@ -78,7 +78,7 @@
                 <div class="csc-textpic-text">
                 
                 <!--  Text: [begin] -->
-                     <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/kalender1.png") ?>" alt="" border="0" width="100%">
+                     <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/luggage-klein.jpg") ?>" alt="" border="0" width="100%">
                      <h2 class="intranet"> <a href="<?=$GLOBALS['ABSOLUTE_URI_STUDIP']. 'plugins.php/IntranetMitarbeiterInnen/urlaubskalender/'?>" title="Opens internal link in current window" class="internal-link">Urlaubskalender</a></h2>
                         <p class="bodytext">
                         </p>
@@ -166,7 +166,38 @@
 	<!--  CONTENT ELEMENT, uid:71/text [end] -->
 		
     
-    <? if (true ||count($courses_upcoming) >0 ){ ?>
+    <!--  CONTENT ELEMENT, uid:42/textpic [begin] -->
+		<div id="c42" class="csc-default csc-space-after-25">
+		<!--  Image block: [begin] -->
+			<div class="csc-textpic-text">
+		<!--  Text: [begin] -->
+            <img src="<?=URLHelper::getLink($GLOBALS['ABSOLUTE_URI_STUDIP']. "plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/schwarzesbrett.png") ?>" alt="" border="0" width="100%">
+			<h2 class="intranet"> <a href="<?=URLHelper::getLink("/plugins.php/schwarzesbrettplugin/category")?>" title="" class="internal-link">Schwarzes Brett</a>
+                <a style="margin-left: 74%;" data-dialog='' href="<?=URLHelper::getLink($GLOBALS['ABSOLUTE_URI_STUDIP']. "/plugins.php/schwarzesbrettplugin/article/create", array('return_to' => $GLOBALS['ABSOLUTE_URI_STUDIP']. 'plugins.php/IntranetMitarbeiterInnen/start'))?>">
+                    <img src="/assets/images/icons/blue/add.svg" alt="add" class="icon-role-clickable icon-shape-add" width="16" height="16">            
+                </a>      
+            </h2>
+                <?php 
+                $schwarzesBrett = PluginManager::getInstance()->getPlugin('SchwarzesBrettWidget');
+                $template = $schwarzesBrett->getPortalTemplate();
+                $template = $schwarzesBrett->getContent();
+                $layout = $GLOBALS['template_factory']->open('shared/index_box');
+                $layout = NULL;
+                echo $template;
+                //echo $template->render(NULL, $layout);
+                //$layout->clear_attributes();
+                ?>
+            <hr>
+		<!--  Text: [end] -->
+			</div>
+		<!--  Image block: [end] -->
+			</div>
+	<!--  CONTENT ELEMENT, uid:42/textpic [end] -->
+    
+    
+    
+    
+    <? if (false && count($courses_upcoming) >0 ){ ?>
 	<!--  CONTENT ELEMENT, uid:13/textpic [begin] -->
 		<div id="c13" class="csc-default csc-space-after-25">
 		<!--  Image block: [begin] -->
@@ -207,7 +238,7 @@
 		</div>
 
 <script>
-    var courses = 6;
+    var courses = 3;
 hidecourses = "- zuklappen";
 showcourses = "+ Alle Kurse anzeigen";
 
