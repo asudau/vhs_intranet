@@ -115,3 +115,17 @@ h2.intranet {
     position: relative;
     border-bottom: none;
 }
+
+section.schwarzesbrett-widget article header h1 a:before {
+   content: none;
+}
+
+form.studip_form fieldset select {
+    width: 100% !important;
+}
+form.studip_form fieldset input {
+    width: 100% !important;
+}
+form.studip_form fieldset textarea {
+    width: 100% !important;
+}
