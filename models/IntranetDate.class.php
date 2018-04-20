@@ -5,20 +5,15 @@
  * @author  <asudau@uos.de>
  *
  * @property int     $id
+ * @property string  $user_id
+ * @property string  $begin
+ * @property string  $end
+ * @property string  $notice
  * @property string  $type
- * @property string  $sub_type
- * @property int     $parent_id
- * @property Block   $parent
- * @property Block[] $children
- * @property string  $seminar_id
- * @property \Course $course
- * @property string  $title
- * @property int     $position
- * @property int     $publication_date
  * @property int     $chdate
  * @property int     $mkdate
  */
-class MAHoliday extends \SimpleORMap
+class IntranetDate extends \SimpleORMap
 {
 
     public $errors = array();

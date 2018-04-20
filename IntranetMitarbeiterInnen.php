@@ -52,7 +52,8 @@ class IntranetMitarbeiterInnen extends StudIPPlugin implements SystemPlugin
          }
         
         
-        $this->template_factory = new Flexi_TemplateFactory(dirname(__FILE__) . '/templates/');    
+        $this->template_factory = new Flexi_TemplateFactory(dirname(__FILE__) . '/templates/');  
+        $this->setupNavigation();
         //PageLayout::addStylesheet($this->getPluginUrl() . '/css/intranet.css');
     }
 
@@ -100,7 +101,8 @@ class IntranetMitarbeiterInnen extends StudIPPlugin implements SystemPlugin
     }
     
     private function setupNavigation(){
-        
+        $planer = Navigation::getItem('/calendar/calendar');
+        //var_dump($planer);
     }
     
      public function getPortalTemplate()

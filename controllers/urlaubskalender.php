@@ -34,7 +34,7 @@ class UrlaubskalenderController extends StudipController
         Navigation::activateItem('/start');
         PageLayout::setTabNavigation(NULL); // disable display of tabs
         PageLayout::setHelpKeyword("Basis.Startseite"); // set keyword for new help
-        PageLayout::setTitle(_('Urlaubskalender'));
+        PageLayout::setTitle(_('Interner Kalender'));
     }
 
     /**
@@ -45,16 +45,16 @@ class UrlaubskalenderController extends StudipController
      *
      * @return void
      */
-    function index_action($action = false, $widgetId = null)
+    function index_action()
     {
         global $perm;
         $sem_id_mitarbeiterinnen = Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN');
         //$sem_id_mitarbeiterinnen = '9fc5dd6a84acf0ad76d2de71b473b341';
         $this->mitarbeiter_admin = $perm->have_studip_perm('dozent', $sem_id_mitarbeiterinnen);
 
-            $sidebar = Sidebar::get();
-            $sidebar->setImage('sidebar/home-sidebar.png');
-            $sidebar->setTitle(_("Meine Startseite"));
+        $sidebar = Sidebar::get();
+        $sidebar->setImage("../../plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/luggage-klein.jpg");
+        $sidebar->setTitle(_("Urlaubskalender"));
 
             
                $views = new ViewsWidget();
@@ -78,7 +78,7 @@ class UrlaubskalenderController extends StudipController
             $sidebar->addWidget($actions);
             
             
-            $this->dates = MAHoliday::findBySQL('1=1');
+            $this->dates = IntranetDate::findBySQL("type = 'urlaub'");
             
 
             // Root may set initial positions
@@ -102,7 +102,7 @@ class UrlaubskalenderController extends StudipController
         //$sem_id_mitarbeiterinnen = '9fc5dd6a84acf0ad76d2de71b473b341';
         
         //alle Einträge der Tabelle
-        $this->dates = MAHoliday::findBySQL('1=1');
+        $this->dates = IntranetDate::findBySQL('1=1');
         
         //für die Darstellung in der Timeline braucht man Integer keys für die Labels
         $this->keys = array();
@@ -133,9 +133,9 @@ class UrlaubskalenderController extends StudipController
         global $perm;
         $this->mitarbeiter_admin = $perm->have_studip_perm('tutor', $this->id);
         
-         $sidebar = Sidebar::get();
-            $sidebar->setImage('sidebar/home-sidebar.png');
-            $sidebar->setTitle(_("Meine Startseite"));
+        $sidebar = Sidebar::get();
+        $sidebar->setImage("../../plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/luggage-klein.jpg");
+        $sidebar->setTitle(_("Urlaubskalender"));
 
             
             $views = new ViewsWidget();
@@ -181,40 +181,38 @@ class UrlaubskalenderController extends StudipController
         
     
     }
-    
+ 
     /**
      *  This action adds a holiday entry
      *
      * @return void
      */
-    public function edit_action($id = '')
+    public function new_birthday_action($id = '')
     {
-        PageLayout::setTitle(_('Neuen Urlaubstermin eintragen'));
+        PageLayout::setTitle(_('Neuen Geburtstag eintragen'));
         $this->id = Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN');
          global $perm;
-        $this->mitarbeiter_admin = $perm->have_studip_perm('dozent', $this->id);
+        $this->mitarbeiter_hilfskraft = $perm->have_studip_perm('tutor', $this->id);
         
          $sidebar = Sidebar::get();
-            $sidebar->setImage('sidebar/home-sidebar.png');
-            $sidebar->setTitle(_("Meine Startseite"));
+        $sidebar->setImage("../../plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/klee_klein.jpg");
+        $sidebar->setTitle(_("Geburtstage"));
 
             
-            $views = new ViewsWidget();
+        $views = new ViewsWidget();
         $views->addLink(_('Kalenderansicht'),
-                        $this->url_for('urlaubskalender'));
-        $views->addLink(_('Zeitstrahl-Ansicht'),
-                        $this->url_for('urlaubskalender/timeline'));
+                        $this->url_for('urlaubskalender/birthday')); 
         $sidebar->addWidget($views);
             
             // Show action to add widget only if not all widgets have already been added.
             $actions = new ActionsWidget();
 
-            $actions->addLink(_('Neuen Urlaubstermin eintragen'),
-                              $this->url_for('urlaubskalender/new'),
+            $actions->addLink(_('Neuen Geburtstag eintragen'),
+                              $this->url_for('urlaubskalender/new_birthday'),
                               Icon::create('add', 'clickable'));
             
-            $actions->addLink(_('Urlaubstermine bearbeiten'),
-                              $this->url_for('urlaubskalender/'. (!$this->mitarbeiter_admin ? ('edituser/'.$GLOBALS['user']->id) : 'edit')),
+            $actions->addLink(_('Geburtstag bearbeiten'),
+                              $this->url_for('urlaubskalender/'. (!$this->mitarbeiter_hilfskraft ? ('edituser/'.$GLOBALS['user']->id) : 'edit')),
                               Icon::create('edit', 'clickable'));
             
             $sidebar->addWidget($actions);
@@ -238,8 +236,9 @@ class UrlaubskalenderController extends StudipController
         $this->quick_search = QuickSearch::get('user_id', $search_obj)
                     ->fireJSFunctionOnSelect('select_user');
         
+        $this->type = 'birthday';
         
-        $this->render_action('edit');
+        $this->render_action('new_birthday');
         
     
     }
@@ -284,7 +283,48 @@ class UrlaubskalenderController extends StudipController
         
         
         $this->user_id = $id ? $id : $_POST['user_id'];
-        $this->entries = MAHoliday::findBySQL('user_id = ? ORDER BY begin ASC',
+        $this->entries = IntranetDate::findBySQL('user_id = ? ORDER BY begin ASC',
+                    array($this->user_id));
+        
+        $this->render_action('edituser');
+        
+    
+    }
+    
+     public function edituser_birthday_action($id = '')
+    {
+        PageLayout::setTitle(_('Geburtstag eintragen'));
+        $this->id = Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN');
+         global $perm;
+        $this->mitarbeiter_hilfskraft = $perm->have_studip_perm('tutor', $this->id);
+        
+        $sidebar = Sidebar::get();
+        $sidebar->setImage("../../plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/klee_klein.jpg");
+        $sidebar->setTitle(_("Geburtstage"));
+
+            
+            $views = new ViewsWidget();
+        $views->addLink(_('Kalenderansicht'),
+                        $this->url_for('urlaubskalender/birthday'));
+        $sidebar->addWidget($views);
+            
+            // Show action to add widget only if not all widgets have already been added.
+            $actions = new ActionsWidget();
+
+            $actions->addLink(_('Neuen Geburtstag eintragen'),
+                              $this->url_for('urlaubskalender/new_birthday'),
+                              Icon::create('add', 'clickable'));
+            
+            $actions->addLink(_('Geburtstag bearbeiten'),
+                              $this->url_for('urlaubskalender/'. (!$this->mitarbeiter_hilfskraft ? ('edituser_birthday/'.$GLOBALS['user']->id) : 'edit')),
+                              Icon::create('edit', 'clickable'));
+
+            $sidebar->addWidget($actions);
+       
+        
+        
+        $this->user_id = $id ? $id : $_POST['user_id'];
+        $this->entries = IntranetDate::findBySQL("user_id = ? AND type = 'birthday' ORDER BY begin ASC",
                     array($this->user_id));
         
         $this->render_action('edituser');
@@ -292,9 +332,9 @@ class UrlaubskalenderController extends StudipController
     
     }
 
-    public function save_action($id = NULL) {
+    public function save_action($type, $id = NULL) {
         
-        if($this->entry = MAHoliday::find($id)){
+        if($this->entry = IntranetDate::find($id)){
             
             foreach($_POST as $key => $value){
                 if (is_array($value)){
@@ -310,7 +350,7 @@ class UrlaubskalenderController extends StudipController
             $this->entry->store();
             PageLayout::postMessage(MessageBox::success(_('Die Änderungen wurden gespeichert.')));
         } else {
-            $this->entry = new MAHoliday();
+            $this->entry = new IntranetDate();
             foreach($_POST as $key => $value){
                 if (is_array($value)){
                     $value = implode(", ", $value);
@@ -321,12 +361,18 @@ class UrlaubskalenderController extends StudipController
                     } catch (Exception $e){}
                 
             }
+            if($type == 'birthday'){
+                $this->entry->end  = $this->entry->begin;
+            }
+            $this->entry->type  = $type;
             $this->entry->mkdate  = time();
             $this->entry->chdate  = time();
             $this->entry->store();
             PageLayout::postMessage(MessageBox::success(_('Der Eintrag wurde gespeichert.')));
         }
-        
+        if ($type == 'birthday') {
+            $this->redirect($this->url_for('/urlaubskalender/birthday'));
+        } else
         $this->redirect($this->url_for('/urlaubskalender'));
         
     }
@@ -339,7 +385,7 @@ class UrlaubskalenderController extends StudipController
      */
     function delete_action($id)
     {
-        if($entry = MAHoliday::find($id)){
+        if($entry = IntranetDate::find($id)){
             $entry->delete();
             PageLayout::postMessage(MessageBox::success(_('Der Eintrag wurde gelöscht.')));
         }
@@ -390,4 +436,46 @@ class UrlaubskalenderController extends StudipController
     
     return $colors[$intCrossfoot];
   } 
+  
+  function birthday_action()
+    {
+        global $perm;
+        $sem_id_mitarbeiterinnen = Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN');
+        //$sem_id_mitarbeiterinnen = '9fc5dd6a84acf0ad76d2de71b473b341';
+        $this->mitarbeiter_hilfskraft = $perm->have_studip_perm('tutor', $sem_id_mitarbeiterinnen);
+
+        $sidebar = Sidebar::get();
+        $sidebar->setImage("../../plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/klee_klein.jpg");
+        $sidebar->setTitle(_("Geburtstage"));
+
+            
+               $views = new ViewsWidget();
+        $views->addLink(_('Kalenderansicht'),
+                        $this->url_for('Geburtstage'))
+                    ->setActive(true);
+        $sidebar->addWidget($views);
+            
+            // Show action to add widget only if not all widgets have already been added.
+            $actions = new ActionsWidget();
+
+            $actions->addLink(_('Neuen Geburtstag eintragen'),
+                              $this->url_for('urlaubskalender/new_birthday'),
+                              Icon::create('add', 'clickable'));
+            
+            $actions->addLink(_('Geburtstag bearbeiten'),
+                              $this->url_for('urlaubskalender/'. (!$this->mitarbeiter_hilfskraft ? ('edituser/'.$GLOBALS['user']->id) : 'edit')),
+                              Icon::create('edit', 'clickable'));
+            $sidebar->addWidget($actions);
+            
+            
+            $this->dates = IntranetDate::findBySQL("type = 'birthday'");
+            
+
+            // Root may set initial positions
+            if ($GLOBALS['perm']->have_perm('root')) {
+              
+            }
+
+    }
+  
 }

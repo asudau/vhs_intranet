@@ -31,7 +31,6 @@ class AddTableForMaHolidaycalendar extends Migration
         DBManager::get()->exec("DROP TABLE intranet_ma_holidays");
         SimpleORMap::expireTableScheme();
     }
-
     
 }
 

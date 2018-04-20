@@ -89,7 +89,26 @@
                 </div>
             <!--  CONTENT ELEMENT, uid:15/textpic [end] -->
                 
+            <!--  CONTENT ELEMENT, uid:16/textpic [begin] -->
+                <div id="c16" class="csc-default csc-space-after-25">
+                <!--  Image block: [begin] -->
+                <div class="csc-textpic-text">
                 
+                <!--  Text: [begin] -->
+                     <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/klee_klein.jpg") ?>" alt="" border="0" width="100%">
+                     <h2 class="intranet"> <a href="<?=$GLOBALS['ABSOLUTE_URI_STUDIP']. 'plugins.php/IntranetMitarbeiterInnen/urlaubskalender/birthday'?>" title="Opens internal link in current window" class="internal-link">Geburtstage</a></h2>
+                        <p class="bodytext">
+                        </p>
+                    
+                <!--  Text: [end] -->
+                </div>
+                <!--  Image block: [end] -->
+                </div>
+            <!--  CONTENT ELEMENT, uid:16/textpic [end] -->    
+            
+            
+            
+            
 				<h4 class="intranet">Unsere Angebote</h4>
 				<table class="dsR4" cellspacing="0" cellpadding="0" border="0">
 					<tbody><tr>

@@ -8,7 +8,7 @@
      <? if ($entries){ 
         foreach($entries as $entry){?>
     
-    <form action="<?= $controller->url_for('urlaubskalender/save/'.$entry->getValue('id')) ?>" class="studip_form" method="POST">
+    <form action="<?= $controller->url_for('urlaubskalender/save/urlaub/'.$entry->getValue('id')) ?>" class="studip_form" method="POST">
         <fieldset>
 
             <input type="hidden" name="user_id" value="<?= $user_id ? $user_id : "" ?>" id="user_id"></input><br>
@@ -29,7 +29,7 @@
 
     <?= LinkButton::createCancel(_('Abbrechen'), $controller->url_for('urlaubskalender/')) ?>
     <? } else{ ?>
-    <h2> Noch keine Urlaubstermine vorhanden </h2>
+    <h2> Noch keine Einträge vorhanden </h2>
     <? }?>
     
     

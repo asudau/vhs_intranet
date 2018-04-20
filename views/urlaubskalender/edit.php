@@ -4,7 +4,7 @@
 <div id='mitarbeiter'>
     
     
-    <form action="<?= $controller->url_for('urlaubskalender/edituser/') ?>" class="studip_form" method="POST">
+    <form action="<?= $controller->url_for('urlaubskalender/edituser'. (($type) ? '_'. $type :'') .'/' ) ?>" class="studip_form" method="POST">
         <fieldset>
 
             <label for="student_search" class="caption">
