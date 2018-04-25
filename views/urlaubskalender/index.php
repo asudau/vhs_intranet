@@ -13,7 +13,7 @@
     <div class="dhx_cal_header"></div>
     <div class="dhx_cal_data"></div>       
 </div>
-
+<?= $date ?>
 <style type="text/css" media="screen">
     html, body{
         margin:0px;
@@ -29,7 +29,7 @@
     scheduler.config.resize_month_timed= false; 
     scheduler.attachEvent("onBeforeDrag", function(){return false;});
     
-    scheduler.init('scheduler_here', new Date(),"month");
+    scheduler.init('scheduler_here', new Date('<?=$date?>'),"month");
     
     var events = [
        

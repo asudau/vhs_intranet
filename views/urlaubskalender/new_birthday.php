@@ -8,7 +8,7 @@
     
     <form action="<?= $controller->url_for('urlaubskalender/save/birthday') ?>" class="studip_form" method="POST">
         <fieldset>
-            <? if ($mitarbeiter_admin){ ?>
+            <? if ($mitarbeiter_hilfskraft){ ?>
             <label for="student_search" class="caption">
                 <?= _('MitarbeiterIn suchen')?>
                 <?= Icon::create('info-circle', 'info', array('title' => $help))?>
