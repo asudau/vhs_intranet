@@ -76,9 +76,7 @@ class StartController extends StudipController
         }
 
         $this->internnewstemplate->icons = $icons;
-        
-        $this->birthday_dates = IntranetDate::findBySQL("type = 'birthday' AND begin = ?", array(date('d.m.Y', time())));
-        
+
         
         //get new and recently visited courses of user
         $statement = DBManager::get()->prepare("SELECT s.Seminar_id, s.Name, ouv.visitdate, ouv.type "

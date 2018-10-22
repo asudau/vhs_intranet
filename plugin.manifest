@@ -1,6 +1,6 @@
 pluginclassname=IntranetMitarbeiterInnen
 pluginname=IntranetMitarbeiterInnen
-origin=elanev
-version=0.4
+origin=elan-ev
+version=1.0-os
 plugincontext=Startseite
-description=Intranet der VHS Ammerland
+description=Intranet der VHS OS

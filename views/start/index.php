@@ -20,7 +20,7 @@
                 <!--  Image block: [begin] -->
                     <div class="csc-textpic-text">
                 <!--  Text: [begin] -->
-                    <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/Kursstart.png") ?>" alt="" border="0" width="100%">
+                    <img src="<?=URLHelper::getLink("plugins_packages/elan-ev/IntranetMitarbeiterInnen/assets/images/Kursstart.png") ?>" alt="" border="0" width="100%">
                     <h2 class="intranet"><a href="index.php?id=35" title="Opens internal link in current window" class="internal-link">Meine Gruppen/Mein Arbeitsbereich</a></h2>
                     <? foreach ($courses as $course){ ?>
                     <section class="contentbox course">
@@ -47,7 +47,7 @@
                 <div class="csc-textpic-text">
                 
                 <!--  Text: [begin] -->
-                    <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/unterlagen1.png") ?>" alt="" border="0" width="100%">
+                    <img src="<?=URLHelper::getLink("plugins_packages/elan-ev/IntranetMitarbeiterInnen/assets/images/unterlagen1.png") ?>" alt="" border="0" width="100%">
                     <h2 class="intranet"> <a href="index.php?id=21" title="Opens internal link in current window" class="internal-link">Dateien</a>
                     <? if ($mitarbeiter_admin){ ?>
                             <a style="margin-left: 68%;" href="<?=$edit_link_files?>">
@@ -72,78 +72,31 @@
                 </div>
                 <!--  CONTENT ELEMENT, uid:14/textpic [end] -->
                 
-                 <!--  CONTENT ELEMENT, uid:16/textpic [begin] -->
-                <div id="c16" class="csc-default csc-space-after-25">
-                <!--  Image block: [begin] -->
-                <div class="csc-textpic-text">
-                
-                <!--  Text: [begin] -->
-                     <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/klee_klein.jpg") ?>" alt="" border="0" width="100%">
-                     <h2 class="intranet"> <a href="<?=$GLOBALS['ABSOLUTE_URI_STUDIP']. 'plugins.php/IntranetMitarbeiterInnen/urlaubskalender/birthday'?>" title="Opens internal link in current window" class="internal-link">Geburtstage</a></h2>
-                      <?php if ($birthday_dates): ?>   
-                        <p class="bodytext">   
-                        <section class="contentbox folder">
-                        <? foreach ($birthday_dates as $date){ ?>
-                        <? $userinfo = UserModel::getUser($date->user_id); ?>
-                        <li class='birthday' title='... hat heute Geburtstag'><?= Icon::create('star', 'clickable')?> <?= $userinfo['Vorname'] . ' ' . $userinfo['Nachname']?></li>
-                        <?}?>
-                        </section>
-
-                        </p>
-                        <?php endif ?>
-                    
-                <!--  Text: [end] -->
-                </div>
-                <!--  Image block: [end] -->
-                </div>
-            <!--  CONTENT ELEMENT, uid:16/textpic [end] -->  
-                
-                
-                <!--  CONTENT ELEMENT, uid:15/textpic [begin] -->
-                <div id="c15" class="csc-default csc-space-after-25">
-                <!--  Image block: [begin] -->
-                <div class="csc-textpic-text">
-                
-                <!--  Text: [begin] -->
-                     <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/luggage-klein.jpg") ?>" alt="" border="0" width="100%">
-                     <h2 class="intranet"> <a href="<?=$GLOBALS['ABSOLUTE_URI_STUDIP']. 'plugins.php/IntranetMitarbeiterInnen/urlaubskalender/'?>" title="Opens internal link in current window" class="internal-link">Urlaubskalender</a>
-<!--                     <a href="<?=$GLOBALS['ABSOLUTE_URI_STUDIP']. 'dispatch.php/calendar/single/week/'. Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN'). '?category=13'?>" title="Opens internal link in current window" class="internal-link">Urlaub neu</a>
-                     <a href="<?=$GLOBALS['ABSOLUTE_URI_STUDIP']. 'plugins.php/IntranetMitarbeiterInnen/calendar_intern'?>" title="Opens internal link in current window" class="internal-link">Urlaub neu</a>-->
-                     </h2>
-                     <p class="bodytext">
-                        </p>
-                    
-                <!--  Text: [end] -->
-                </div>
-                <!--  Image block: [end] -->
-                </div>
-            <!--  CONTENT ELEMENT, uid:15/textpic [end] -->
-                
   
 				<h4 class="intranet">Unsere Angebote</h4>
 				<table class="dsR4" cellspacing="0" cellpadding="0" border="0">
 					<tbody><tr>
-						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=64" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/pro_gesellschaft.png") ?>" alt="" border="0" width="73" height="72"><br>
+						<td class="dsR15"><div class="zentriert"><a href="" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elan-ev/IntranetMitarbeiterInnen/assets/images/pro_gesellschaft.png") ?>" alt="" border="0" width="73" height="72"><br>
 							Gesellschaft</a></div></td>
-						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=65" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/pro_paedagogik.png") ?>" alt="" border="0" width="73" height="72"><br>
+						<td class="dsR15"><div class="zentriert"><a href="" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elan-ev/IntranetMitarbeiterInnen/assets/images/pro_paedagogik.png") ?>" alt="" border="0" width="73" height="72"><br>
 						Pädagogik</a></div></td>
-						<td class="dsR15"><a href="https://www.kvhs-ammerland.de/index.php?id=66" target="_blank"></a><div class="zentriert"><a href="index.php?id=66"><img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/pro_zielgruppen.png") ?>" alt="" border="0" width="73" height="72"><br>
+						<td class="dsR15"><a href="" target="_blank"></a><div class="zentriert"><a href="index.php?id=66"><img src="<?=URLHelper::getLink("plugins_packages/elan-ev/IntranetMitarbeiterInnen/assets/images/pro_zielgruppen.png") ?>" alt="" border="0" width="73" height="72"><br>
 							Zielgruppen</a></div></td>
 					</tr>
 					<tr>
-						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=67" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/pro_grundbildung.png") ?>" alt="" border="0" width="72" height="72"><br>
+						<td class="dsR15"><div class="zentriert"><a href="" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elan-ev/IntranetMitarbeiterInnen/assets/images/pro_grundbildung.png") ?>" alt="" border="0" width="72" height="72"><br>
 							Grundbildung</a></div></td>
-						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=68" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/pro_gesundheit.png") ?>" alt="" border="0" width="73" height="72"><br>
+						<td class="dsR15"><div class="zentriert"><a href="" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elan-ev/IntranetMitarbeiterInnen/assets/images/pro_gesundheit.png") ?>" alt="" border="0" width="73" height="72"><br>
 							Gesundheit</a></div></td>
-						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=69" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/pro_beruf.png") ?>" alt="" border="0" width="73" height="72"><br>
+						<td class="dsR15"><div class="zentriert"><a href="" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elan-ev/IntranetMitarbeiterInnen/assets/images/pro_beruf.png") ?>" alt="" border="0" width="73" height="72"><br>
 							Beruf</a></div></td>
 					</tr>
 					<tr>
-						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=70" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/pro_sprachen.png") ?>" alt="" border="0" width="73" height="72"><br>
+						<td class="dsR15"><div class="zentriert"><a href="" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elan-ev/IntranetMitarbeiterInnen/assets/images/pro_sprachen.png") ?>" alt="" border="0" width="73" height="72"><br>
 							Sprachen</a></div></td>
-						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=71" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/pro_kultur.png") ?>" alt="" border="0" width="73" height="72"><br>
+						<td class="dsR15"><div class="zentriert"><a href="" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elan-ev/IntranetMitarbeiterInnen/assets/images/pro_kultur.png") ?>" alt="" border="0" width="73" height="72"><br>
 						Kultur</a></div></td>
-						<td class="dsR15"><div class="zentriert"><a href="https://www.kvhs-ammerland.de/index.php?id=4" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/pro_beruf.png") ?>" alt="" border="0" width="73" height="72"><br>
+						<td class="dsR15"><div class="zentriert"><a href="" target="_blank"><img src="<?=URLHelper::getLink("plugins_packages/elan-ev/IntranetMitarbeiterInnen/assets/images/pro_beruf.png") ?>" alt="" border="0" width="73" height="72"><br>
 						Projekte</a></div></td>
 					</tr>
 				</tbody></table>
@@ -157,7 +110,7 @@
 		<!--  Image block: [begin] -->
 			<div class="csc-textpic csc-textpic-intext-right csc-textpic-equalheight"><div class="csc-textpic-text">
 		<!--  Text: [begin] -->
-            <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/Informationen.png") ?>" alt="" border="0" width="100%">
+            <img src="<?=URLHelper::getLink("plugins_packages/elan-ev/IntranetMitarbeiterInnen/assets/images/Informationen.png") ?>" alt="" border="0" width="100%">
 			<h2 class="intranet">
                     <a href="" title="Opens internal link in current window" class="internal-link">Interne Informationen</a>
                     <? if ($mitarbeiter_admin){ ?>
@@ -180,7 +133,7 @@
 		<div id="c71" class="intranet_news csc-default csc-space-after-25">
 		<!--  Text: [begin] -->
         <div style="position:relative">
-       <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/Projektbereich.png") ?>" alt="" border="0" width="100%">
+       <img src="<?=URLHelper::getLink("plugins_packages/elan-ev/IntranetMitarbeiterInnen/assets/images/Projektbereich.png") ?>" alt="" border="0" width="100%">
 			<h2 class="intranet"><a href="" title="Opens internal link in current window" class="internal-link">Neues aus dem Projektbereich</a>
                  <? if ($mitarbeiter_admin){ ?>
                     <a style="margin-left: 58%;" href="<?=$edit_link_projectnews?>" rel="get_dialog">
@@ -196,36 +149,6 @@
 	<!--  CONTENT ELEMENT, uid:71/text [end] -->
 		
     
-    <!--  CONTENT ELEMENT, uid:42/textpic [begin] -->
-		<div id="c42" class="csc-default csc-space-after-25">
-		<!--  Image block: [begin] -->
-			<div class="csc-textpic-text">
-		<!--  Text: [begin] -->
-            <img src="<?=URLHelper::getLink($GLOBALS['ABSOLUTE_URI_STUDIP']. "plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/schwarzesbrett.jpg") ?>" alt="" border="0" width="100%">
-			<h2 class="intranet"> <a href="<?=URLHelper::getLink("/plugins.php/schwarzesbrettplugin/category")?>" title="" class="internal-link">Schwarzes Brett</a>
-                <a style="margin-left: 74%;" data-dialog='' href="<?=URLHelper::getLink($GLOBALS['ABSOLUTE_URI_STUDIP']. "/plugins.php/schwarzesbrettplugin/article/create", array('return_to' => $GLOBALS['ABSOLUTE_URI_STUDIP']. 'plugins.php/IntranetMitarbeiterInnen/start'))?>">
-                    <img src="/assets/images/icons/blue/add.svg" alt="add" class="icon-role-clickable icon-shape-add" width="16" height="16">            
-                </a>      
-            </h2>
-                <?php 
-                $schwarzesBrett = PluginManager::getInstance()->getPlugin('SchwarzesBrettWidget');
-                $template = $schwarzesBrett->getPortalTemplate();
-                $template = $schwarzesBrett->getContent();
-                $layout = $GLOBALS['template_factory']->open('shared/index_box');
-                $layout = NULL;
-                echo $template;
-                //echo $template->render(NULL, $layout);
-                //$layout->clear_attributes();
-                ?>
-            <hr>
-		<!--  Text: [end] -->
-			</div>
-		<!--  Image block: [end] -->
-			</div>
-	<!--  CONTENT ELEMENT, uid:42/textpic [end] -->
-    
-    
-    
     
     <? if (false && count($courses_upcoming) >0 ){ ?>
 	<!--  CONTENT ELEMENT, uid:13/textpic [begin] -->
@@ -233,7 +156,7 @@
 		<!--  Image block: [begin] -->
 			<div class="csc-textpic-text">
 		<!--  Text: [begin] -->
-            <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/Kursstart.png") ?>" alt="" border="0" width="100%">
+            <img src="<?=URLHelper::getLink("plugins_packages/elan-ev/IntranetMitarbeiterInnen/assets/images/Kursstart.png") ?>" alt="" border="0" width="100%">
 			<h2 class="intranet"> <a href="index.php?id=21" title="Opens internal link in current window" class="internal-link">Kurse, die demnächst starten</a>
                 <? if ($mitarbeiter_admin){ ?>
                     <a style="margin-left: 58%;" href="<?= $this->controller->url_for('start/insertCoursebegin')?>" rel="get_dialog">
