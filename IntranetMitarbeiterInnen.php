@@ -25,7 +25,7 @@ class IntranetMitarbeiterInnen extends StudIPPlugin implements SystemPlugin
         $ma_intranet = false;
         foreach ($courses as $cm){
             //TODO ersetzen durch config Eintrag
-            if ($cm->seminar_id == '7637bfed08c7a2a3649eed149375cbc0') $ma_intranet = true;
+            if ($cm->seminar_id == Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN')) $ma_intranet = true;
             //test lokal
             if ($cm->seminar_id == '568fce7262620700103ce1657cabc5e3') $ma_intranet = true; 
         } 
