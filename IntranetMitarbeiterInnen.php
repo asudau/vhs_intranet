@@ -14,20 +14,22 @@
 class IntranetMitarbeiterInnen extends StudIPPlugin implements SystemPlugin
 {
 
-
     private  $template_factory;	
 
     function __construct()
     {
         global $user;
-        
+        parent::__construct();
+        $sem = Course::findCurrent()->id;
         $courses = $user->course_memberships;
         $ma_intranet = false;
         foreach ($courses as $cm){
+            //TODO ersetzen durch config Eintrag
             if ($cm->seminar_id == '7637bfed08c7a2a3649eed149375cbc0') $ma_intranet = true;
             //test lokal
             if ($cm->seminar_id == '568fce7262620700103ce1657cabc5e3') $ma_intranet = true; 
         } 
+
         $referer = $_SERVER['REQUEST_URI'];
         
         if($ma_intranet){
@@ -50,10 +52,16 @@ class IntranetMitarbeiterInnen extends StudIPPlugin implements SystemPlugin
              header('Location: '. $GLOBALS['ABSOLUTE_URI_STUDIP']. 'dispatch.php/start', true, 303);
 				exit();	
          }
+         
+         if ( $referer!=str_replace("dispatch.php/calendar","",$referer) && ($sem == Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN'))){
+             PageLayout::addStylesheet($this->getPluginUrl() . '/css/calendar_intranet.css');
+         }
         
         
         $this->template_factory = new Flexi_TemplateFactory(dirname(__FILE__) . '/templates/');  
         $this->setupNavigation();
+        PageLayout::addScript($this->getPluginURL().'/assets/js/calendar_colors.js');
+        //NotificationCenter::addObserver($this, "setup_calendar_js", "PageWillRender");
         //PageLayout::addStylesheet($this->getPluginUrl() . '/css/intranet.css');
     }
 
@@ -74,6 +82,7 @@ class IntranetMitarbeiterInnen extends StudIPPlugin implements SystemPlugin
         PageLayout::addScript($this->getPluginURL().'/assets/js/dhtmlxscheduler.js');
         PageLayout::addScript($this->getPluginURL().'/assets/js/locale_de.js');
         PageLayout::addScript($this->getPluginURL().'/assets/js/dhtmlxscheduler_timeline.js');
+        
 		$this->setupAutoload();
     }
 	
@@ -101,7 +110,9 @@ class IntranetMitarbeiterInnen extends StudIPPlugin implements SystemPlugin
     }
     
     private function setupNavigation(){
-        $planer = Navigation::getItem('/calendar/calendar');
+        if (Navigation::hasItem('/calendar/calendar')) {
+            $planer = Navigation::getItem('/calendar/calendar');
+        }
         //var_dump($planer);
     }
     
@@ -109,4 +120,9 @@ class IntranetMitarbeiterInnen extends StudIPPlugin implements SystemPlugin
     {
         return NULL;
     }
+
+    public function setup_calendar_js(){
+        PageLayout::addScript($this->getPluginURL().'/assets/js/calendar_colors.js');
+    }
+    
 }

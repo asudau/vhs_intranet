@@ -1,3 +1,9 @@
+#layout_page {
+    width: 1100px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
 
 .intranet_news .contentbox > header{
     display: none;
@@ -9,7 +15,6 @@ section.course > a {
     font-weight: normal;
     margin-bottom: 12px;
     padding: 4px;
-    //border: solid 1px;
 }
 
 section.folder > a {

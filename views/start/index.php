@@ -106,8 +106,11 @@
                 
                 <!--  Text: [begin] -->
                      <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/luggage-klein.jpg") ?>" alt="" border="0" width="100%">
-                     <h2 class="intranet"> <a href="<?=$GLOBALS['ABSOLUTE_URI_STUDIP']. 'plugins.php/IntranetMitarbeiterInnen/urlaubskalender/'?>" title="Opens internal link in current window" class="internal-link">Urlaubskalender</a></h2>
-                        <p class="bodytext">
+                     <h2 class="intranet"> <a href="<?=$GLOBALS['ABSOLUTE_URI_STUDIP']. 'plugins.php/IntranetMitarbeiterInnen/urlaubskalender/'?>" title="Opens internal link in current window" class="internal-link">Urlaubskalender</a>
+<!--                     <a href="<?=$GLOBALS['ABSOLUTE_URI_STUDIP']. 'dispatch.php/calendar/single/week/'. Config::get()->getValue('INTRANET_SEMID_MITARBEITERINNEN'). '?category=13'?>" title="Opens internal link in current window" class="internal-link">Urlaub neu</a>
+                     <a href="<?=$GLOBALS['ABSOLUTE_URI_STUDIP']. 'plugins.php/IntranetMitarbeiterInnen/calendar_intern'?>" title="Opens internal link in current window" class="internal-link">Urlaub neu</a>-->
+                     </h2>
+                     <p class="bodytext">
                         </p>
                     
                 <!--  Text: [end] -->
@@ -198,7 +201,7 @@
 		<!--  Image block: [begin] -->
 			<div class="csc-textpic-text">
 		<!--  Text: [begin] -->
-            <img src="<?=URLHelper::getLink($GLOBALS['ABSOLUTE_URI_STUDIP']. "plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/schwarzesbrett.png") ?>" alt="" border="0" width="100%">
+            <img src="<?=URLHelper::getLink($GLOBALS['ABSOLUTE_URI_STUDIP']. "plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/schwarzesbrett.jpg") ?>" alt="" border="0" width="100%">
 			<h2 class="intranet"> <a href="<?=URLHelper::getLink("/plugins.php/schwarzesbrettplugin/category")?>" title="" class="internal-link">Schwarzes Brett</a>
                 <a style="margin-left: 74%;" data-dialog='' href="<?=URLHelper::getLink($GLOBALS['ABSOLUTE_URI_STUDIP']. "/plugins.php/schwarzesbrettplugin/article/create", array('return_to' => $GLOBALS['ABSOLUTE_URI_STUDIP']. 'plugins.php/IntranetMitarbeiterInnen/start'))?>">
                     <img src="/assets/images/icons/blue/add.svg" alt="add" class="icon-role-clickable icon-shape-add" width="16" height="16">            
