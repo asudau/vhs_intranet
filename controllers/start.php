@@ -18,6 +18,14 @@ require_once 'app/controllers/news.php';
 
 class StartController extends StudipController
 {
+    
+    public function __construct($dispatcher)
+    {
+        parent::__construct($dispatcher);
+        $this->plugin = $dispatcher->plugin;
+    }
+    
+    
     /**
      * Callback function being called before an action is executed.
      */
@@ -198,6 +206,11 @@ class StartController extends StudipController
            
     }
     
+      public function gebaeudemanagement_action()
+    {
+    
+    }
+    
     
       function insertCoursebegin_action($id = ''){
         
@@ -235,4 +248,23 @@ class StartController extends StudipController
         //$this->setProperties($calendar_event, $component);
         //$calendar_event->setRecurrence($component['RRULE']);
     }
+    
+    
+     public function url_for($to = '')
+    {
+        $args = func_get_args();
+
+        # find params
+        $params = array();
+        if (is_array(end($args))) {
+            $params = array_pop($args);
+        }
+
+        # urlencode all but the first argument
+        $args = array_map('urlencode', $args);
+        $args[0] = $to;
+
+        return PluginEngine::getURL($this->plugin, $params, join('/', $args));
+    }
+    
 }
