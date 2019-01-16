@@ -41,6 +41,34 @@
                 </div>
                 <!--  CONTENT ELEMENT, uid:73/textpic [end] -->
 
+<!--                   CONTENT ELEMENT, uid:75/textpic [begin] 
+                <div id="c75" class="csc-default csc-space-after-25">
+                  Image block: [begin] 
+                    <div class="csc-textpic-text">
+                  Text: [begin] 
+                    <img src="<?=URLHelper::getLink("plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/question-mark.jpg") ?>" alt="" border="0" width="100%">
+                    <h2 class="intranet"><a href="" title="" class="internal-link">Rund um meine Kurse</a></h2>
+                    
+                    <section class="contentbox themen">
+                        <a href='<?=$this->controller->url_for('start/gebaeudemanagement')?>'>Leitfaden für neue DozentInnen (PDF)</a>
+                    </section>
+                    <section class="contentbox themen">
+                        <a href='<?=$this->controller->url_for('start/gebaeudemanagement')?>'>Formular xyz (DOC)</a>
+                    </section>
+                    <section class="contentbox themen">
+                        <a href='<?=$this->controller->url_for('start/gebaeudemanagement')?>'>Mein Kurs in Studip (PDF) </a>
+                    </section>
+                    
+
+                    <hr>
+                      Text: [end] 
+                    </div>
+                      Image block: [end] 
+                </div>
+                  CONTENT ELEMENT, uid:75/textpic [end] -->
+                
+                
+                
                 <!--  CONTENT ELEMENT, uid:14/textpic [begin] -->
                 <div id="c14" class="csc-default csc-space-after-25">
                 <!--  Image block: [begin] -->
@@ -51,7 +79,7 @@
                     <h2 class="intranet"> <a href="index.php?id=21" title="Opens internal link in current window" class="internal-link">Dateien</a>
                     <? if ($mitarbeiter_admin){ ?>
                             <a style="margin-left: 68%;" href="<?=$edit_link_files?>">
-                                <img src="/assets/images/icons/blue/edit.svg" alt="add" class="icon-role-clickable icon-shape-add" width="16" height="16">            
+                                <?= Icon::create('add', 'clickable')?>           
                             </a>
                     <? } ?>
                     </h2>
@@ -162,7 +190,7 @@
                     <a href="" title="Opens internal link in current window" class="internal-link">Interne Informationen</a>
                     <? if ($mitarbeiter_admin){ ?>
                     <a style="margin-left: 68%;" href="<?=$edit_link_internnews?>" rel="get_dialog">
-                        <img src="/assets/images/icons/blue/add.svg" alt="add" class="icon-role-clickable icon-shape-add" width="16" height="16">            
+                        <?= Icon::create('add', 'clickable')?>             
                     </a>
                     <? } ?>
             </h2>
@@ -184,7 +212,7 @@
 			<h2 class="intranet"><a href="" title="Opens internal link in current window" class="internal-link">Neues aus dem Projektbereich</a>
                  <? if ($mitarbeiter_admin){ ?>
                     <a style="margin-left: 58%;" href="<?=$edit_link_projectnews?>" rel="get_dialog">
-                        <img src="/assets/images/icons/blue/add.svg" alt="add" class="icon-role-clickable icon-shape-add" width="16" height="16">            
+                        <?= Icon::create('add', 'clickable')?>             
                     </a>
                  <? } ?>
             </h2>
@@ -204,7 +232,7 @@
             <img src="<?=URLHelper::getLink($GLOBALS['ABSOLUTE_URI_STUDIP']. "plugins_packages/elanev/IntranetMitarbeiterInnen/assets/images/schwarzesbrett.jpg") ?>" alt="" border="0" width="100%">
 			<h2 class="intranet"> <a href="<?=URLHelper::getLink("/plugins.php/schwarzesbrettplugin/category")?>" title="" class="internal-link">Schwarzes Brett</a>
                 <a style="margin-left: 74%;" data-dialog='' href="<?=URLHelper::getLink($GLOBALS['ABSOLUTE_URI_STUDIP']. "/plugins.php/schwarzesbrettplugin/article/create", array('return_to' => $GLOBALS['ABSOLUTE_URI_STUDIP']. 'plugins.php/IntranetMitarbeiterInnen/start'))?>">
-                    <img src="/assets/images/icons/blue/add.svg" alt="add" class="icon-role-clickable icon-shape-add" width="16" height="16">            
+                    <?= Icon::create('add', 'clickable')?>            
                 </a>      
             </h2>
                 <?php 
@@ -237,7 +265,7 @@
 			<h2 class="intranet"> <a href="index.php?id=21" title="Opens internal link in current window" class="internal-link">Kurse, die demnächst starten</a>
                 <? if ($mitarbeiter_admin){ ?>
                     <a style="margin-left: 58%;" href="<?= $this->controller->url_for('start/insertCoursebegin')?>" rel="get_dialog">
-                        <img src="/assets/images/icons/blue/add.svg" alt="add" class="icon-role-clickable icon-shape-add" width="16" height="16">            
+                        <?= Icon::create('add', 'clickable')?>             
                     </a>
                  <? } ?>        
             </h2>
@@ -268,7 +296,7 @@
 		</div>
 
 <script>
-    var courses = 3;
+    var courses = 6;
 hidecourses = "- zuklappen";
 showcourses = "+ Alle Kurse anzeigen";
 
